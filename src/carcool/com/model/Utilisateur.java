@@ -15,6 +15,10 @@ public class Utilisateur implements IUserRegisterValidator{
 	
 	private HashSet<Trajet> trajets;
 	
+	public String getNom() {
+		return nom;
+	}
+
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}

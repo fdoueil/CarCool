@@ -54,7 +54,7 @@
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-users fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
-						name="name" id="name" placeholder="Entrez le nom d'utilisateur"
+						name="nom" id="nom" placeholder="Entrez le nom d'utilisateur"
 						value="${newUser.nom}" />
 				</div>
 			</div>
@@ -65,8 +65,6 @@
 				d'usager</label>
 			<div class="cols-sm-10">
 				<div class="radio">
-					 <span class="input-group-addon"><i class="fa fa-lock fa-lg"
-						aria-hidden="true"></i></span> 
 						<label><input type="radio"
 						class=".radio-inline" name="typeusager" id="typeusager" value="conducteur" checked
 						> Conducteur </label>

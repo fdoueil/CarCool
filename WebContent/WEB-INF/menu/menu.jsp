@@ -23,8 +23,9 @@
 			</h5>
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="#">Connexion à mon espace</a></li>
-				<li><a href=<c:url value='/register'/>>Créer un nouvel
-						utilisateur</a></li>
+				<li><a href=<c:url value='/register'/>>Créer un compte</a></li>
+				<li><a href=<c:url value='/delete'/>>Supprimer mon compte</a></li>
+				<li><a href=<c:url value='/update'/>>Modifier mon compte</a></li>
 				<li><a href=<c:url value='/users'/>>Afficher la liste des utilisateurs</a></li>
 			</ul>
 		</div>

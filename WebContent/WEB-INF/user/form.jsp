@@ -25,7 +25,7 @@
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-lock fa-lg"
 						aria-hidden="true"></i></span> <input type="password" required="true"
-						class="form-control" name="pwd1" id="pwd1"
+						class="form-control" name="password1" id="password1"
 						placeholder="Entrez votre mot de passe" />
 				</div>
 			</div>
@@ -38,10 +38,10 @@
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-lock fa-lg"
 						aria-hidden="true"></i></span> <input type="password" required="true"
-						class="form-control" name="pwd2" id="pwd2"
+						class="form-control" name="password2" id="password2"
 						placeholder="Confirmez votre mot de passe" />
 				</div>
-				<span class="error text-danger">${errors['pwd1']}</span>
+				<span class="error text-danger">${errors['password1']}</span>
 				<!--<span class="help-block" style="color: #FF0000;">${errors['pwd1']}</span>-->
 				<!--<div style="color: #FF0000;">${errors['pwd1']}</div>-->
 			</div>
@@ -55,7 +55,7 @@
 					<span class="input-group-addon"><i class="fa fa-users fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="name" id="name" placeholder="Entrez le nom d'utilisateur"
-						value="${newUser.name}" />
+						value="${newUser.nom}" />
 				</div>
 			</div>
 		</div>
@@ -64,14 +64,15 @@
 			<label for="pwd1" class="cols-sm-3 control-label">Type 
 				d'usager</label>
 			<div class="cols-sm-10">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock fa-lg"
-						aria-hidden="true"></i></span> <input type="radio" required="true"
-						class="form-control" name="typeusager" id="typeusager" value="conducteur"
-						> Conducteur
-						<input type="radio" required="true"
-						class="form-control" name="typeusager" id="typeusager" value="passager"
-						> Passager
+				<div class="radio">
+					 <span class="input-group-addon"><i class="fa fa-lock fa-lg"
+						aria-hidden="true"></i></span> 
+						<label><input type="radio"
+						class=".radio-inline" name="typeusager" id="typeusager" value="conducteur" checked
+						> Conducteur </label>
+						<label><input type="radio"
+						class=".radio-inline" name="typeusager" id="typeusager" value="passager"
+						> Passager </label>
 						
 				</div>
 			</div>

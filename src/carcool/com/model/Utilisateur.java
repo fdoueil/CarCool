@@ -56,13 +56,13 @@ public class Utilisateur implements IUserRegisterValidator{
 	@Override
 	public String validatePwd() {
 		String ret = VALIDATE_OK;
-		if (!this.password1.equals(this.password2)) {
+		/**if (!this.password1.equals(this.password2)) {
 			return "Les mots de passes saisis ne sont pas identiques !";
-		}
+		}*/
 
-		if (!this.password1.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}")) {
-			return "Le mot de passe doit : contenir au moins 1 chiffre, une lettre minuscule, une lettre majuscule, avoir une longueur d'au moins 8 caractères, pas d'espaces et un caractère spécial parmi @#$%^&+=";
-		}
+		/*if (!this.password1.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}")) {
+			return "Le mot de passe doit : contenir au moins 1 chiffre, une lettre minuscule, une lettre majuscule, avoir une longueur d'au moins 8 caractï¿½res, pas d'espaces et un caractï¿½re spï¿½cial parmi @#$%^&+=";
+		}*/
 		return ret;
 		// Password is complex ?
 		/*

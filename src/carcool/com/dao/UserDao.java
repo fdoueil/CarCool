@@ -35,4 +35,19 @@ public class UserDao {
 		
 		return ret;
 	}
+	
+	public Utilisateur getUserById(int id) {
+		Utilisateur ret=null;
+		
+		Iterator<Utilisateur> iterator = utilisateurs.iterator();
+		while (iterator.hasNext()) {
+			Utilisateur element = iterator.next();
+			if (element.getIdUtilisateur()==id) {
+				ret=element;
+				break;
+			}
+		}
+		
+		return ret;
+	}
 }

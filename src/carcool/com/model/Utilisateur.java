@@ -1,6 +1,6 @@
 package carcool.com.model;
 
-import java.util.List;
+import java.util.HashSet;
 
 import carcool.com.interfaces.IUserRegisterValidator;
 
@@ -13,8 +13,12 @@ public class Utilisateur implements IUserRegisterValidator{
 	private String password2;
 	private static final String VALIDATE_OK = null;
 	
-	private List<Trajet> trajets;
+	private HashSet<Trajet> trajets;
 	
+	public int getIdUtilisateur() {
+		return idUtilisateur;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -28,11 +32,11 @@ public class Utilisateur implements IUserRegisterValidator{
 		this.password2 = password2;
 	}
 
-	public List<Trajet> getTrajets() {
+	public HashSet<Trajet> getTrajets() {
 		return trajets;
 	}
 
-	public void setTrajets(List<Trajet> trajets) {
+	public void setTrajets(HashSet<Trajet> trajets) {
 		this.trajets = trajets;
 	}
 

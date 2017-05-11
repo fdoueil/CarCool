@@ -1,5 +1,7 @@
 package carcool.com.model;
 
+import java.util.List;
+
 import carcool.com.interfaces.IUserRegisterValidator;
 
 public class Utilisateur implements IUserRegisterValidator{
@@ -11,6 +13,29 @@ public class Utilisateur implements IUserRegisterValidator{
 	private String password2;
 	private static final String VALIDATE_OK = null;
 	
+	private List<Trajet> trajets;
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public Utilisateur(int idUtilisateur, String email, String nom, String password1, String password2) {
+		super();
+		this.idUtilisateur = idUtilisateur;
+		this.email = email;
+		this.nom = nom;
+		this.password1 = password1;
+		this.password2 = password2;
+	}
+
+	public List<Trajet> getTrajets() {
+		return trajets;
+	}
+
+	public void setTrajets(List<Trajet> trajets) {
+		this.trajets = trajets;
+	}
+
 	@Override
 	public String validateEmail() {
 		String ret = VALIDATE_OK;

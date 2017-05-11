@@ -14,6 +14,10 @@ public class Trajet {
 	private String plageHoraireAller;
 	private String plageHoraireRetour;
 
+	public String getDepuisAdresse() {
+		return depuisAdresse;
+	}
+
 	/**
 	 * Constructeur.
 	 */

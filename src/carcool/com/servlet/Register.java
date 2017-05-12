@@ -27,6 +27,9 @@ public class Register extends HttpServlet {
 	private static final String PARAM_NAME_PWD2 = "password2";
 	private static final String PARAM_NAME_PWD1 = "password1";
 	private static final String PARAM_NAME_EMAIL = "email";
+	
+	private static final String PARAM_TYPE_USAGER = "typeusager";
+	
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL = "/WEB-INF/register.jsp";
 
@@ -36,12 +39,30 @@ public class Register extends HttpServlet {
 
 	private HttpSession session;
 	
+	private LogsServlets LOGGER = new LogsServlets (Register.class.getName(),null, Register.class.getName());
+	
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public Register() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		LOGGER.logger_end();
+		super.destroy();
+
+	}
+
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+		LOGGER.logger_begin(LOGGER.getName());
 	}
 
 	/**
@@ -72,6 +93,12 @@ public class Register extends HttpServlet {
 		String pwd1 = request.getParameter(PARAM_NAME_PWD1);
 		String pwd2 = request.getParameter(PARAM_NAME_PWD2);
 		String nom = request.getParameter(PARAM_NAME_NAME);
+		String typeusager = request.getParameter(PARAM_TYPE_USAGER);
+		
+		LOGGER.info("L'utilisateur a saisi l'email: " + email);
+		LOGGER.info("L'utilisateur a saisi le mot de passe: " + pwd1);
+		LOGGER.info("L'utilisateur a saisi le nom d'utilisateur: " + nom);
+		LOGGER.info("L'utilisateur a sélectionné comme type d'usager: " + typeusager);
 
 		Utilisateur newUser = new Utilisateur(1, email, pwd1, pwd2, nom);
 		
@@ -101,6 +128,7 @@ public class Register extends HttpServlet {
 		// OK donc on ajoute l'utilisateur à la liste
 		if (actionResult.equals("1")) {
 			MaDao.getUserDao().getUtilisateurs().add(newUser);
+			LOGGER.info("Utilisateur " + newUser.getNom() + " ajouté à la liste des utilisateurs");
 		}
 		
 		session.setAttribute("users", users);
@@ -114,4 +142,6 @@ public class Register extends HttpServlet {
 
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
+	
+
 }

@@ -41,7 +41,6 @@ public class Register extends HttpServlet {
 	
 	private LogsServlets LOGGER = new LogsServlets (Register.class.getName(),null, Register.class.getName());
 	
-	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -61,8 +60,10 @@ public class Register extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		super.init();
 		LOGGER.logger_begin(LOGGER.getName());
+		LOGGER.config("Initialisation de la Servlet.");
+		super.init();
+		LOGGER.config("Fin de l'initialisation de la Servlet.");
 	}
 
 	/**
@@ -71,6 +72,7 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		LOGGER.config("Servlet démarrée");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
 

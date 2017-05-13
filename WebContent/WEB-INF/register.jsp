@@ -35,12 +35,12 @@
 			            </div> 
 						<div class="main-login main-center">	
 							<c:import url="/WEB-INF/user/form.jsp"/>	
-							<c:if test="${actionResult=='1'}">
+							<!--<c:if test="${actionResult=='1'}">
 								<c:import url="/WEB-INF/user/card.jsp"/>
 								<div class="form-group ">
 									<a href=<c:url value='/'/> class="btn btn-primary btn-block">Retour à l'accueil</a>
 								</div>
-							</c:if>	
+							</c:if>-->	
 						</div>
 					</div>
 				</div>

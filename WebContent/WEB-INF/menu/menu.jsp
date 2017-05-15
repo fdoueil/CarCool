@@ -15,17 +15,17 @@
 						GESTION DES UTILISATEURS</b></small>
 			</h5>
 			<ul class="nav nav-pills nav-stacked">
-				<li><a href="/UserManagerFdoueil">Accueil</a></li>
+				<li><a href="/CarCool">Accueil</a></li>
 				<!--<li><a href="#">Search</a></li>-->
 			</ul>
 			<h5>
 				<i class="glyphicon glyphicon-user"></i> <small><b>UTILISATEURS</b></small>
 			</h5>
 			<ul class="nav nav-pills nav-stacked">
-				<li><a href="#">Connexion à mon espace</a></li>
-				<li><a href=<c:url value='/register'/>>Créer un compte</a></li>
-				<li><a href=<c:url value='/delete'/>>Supprimer mon compte</a></li>
-				<li><a href=<c:url value='/update'/>>Modifier mon compte</a></li>
+				<!--<li><a href=<c:url value='/j_security_check'/>>Connexion à mon espace</a></li>-->
+				<li><a href=<c:url value='/registerUser'/>>Créer un compte</a></li>
+				<li><a href=<c:url value='/deleteUser'/>>Supprimer mon compte</a></li>
+				<li><a href=<c:url value='/updateUser'/>>Modifier mon compte</a></li>
 				<li><a href=<c:url value='/users'/>>Afficher la liste des utilisateurs</a></li>
 			</ul>
 		</div>

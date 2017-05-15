@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<form class="form-horizontal" method="post" action="register">
+	<form class="form-horizontal" method="post" action="registerUser">
 
 		<div class="form-group">
 			<label for="email" class="cols-sm-3 control-label">Adresse
@@ -66,10 +66,10 @@
 			<div class="cols-sm-10">
 				<div class="radio">
 						<label><input type="radio"
-						class=".radio-inline" name="typeusager" id="typeusager" value="conducteur" checked
+						class=".radio-inline" name="typeusager" id="typeusager" value="Conducteur" checked
 						> Conducteur </label>
 						<label><input type="radio"
-						class=".radio-inline" name="typeusager" id="typeusager" value="passager"
+						class=".radio-inline" name="typeusager" id="typeusager" value="Passager"
 						> Passager </label>
 						
 				</div>

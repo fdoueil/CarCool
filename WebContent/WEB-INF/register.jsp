@@ -34,7 +34,7 @@
 			               	</div>
 			            </div> 
 						<div class="main-login main-center">	
-							<c:import url="/WEB-INF/user/form.jsp"/>	
+							<c:import url="/WEB-INF/user/create_form.jsp"/>	
 							<!--<c:if test="${actionResult=='1'}">
 								<c:import url="/WEB-INF/user/card.jsp"/>
 								<div class="form-group ">

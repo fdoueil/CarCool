@@ -75,6 +75,7 @@
 				var blMarker = new google.maps.Marker({
 			          position: blLatLng,
 			          map: map,
+			          icon: 'assets/img/logo_bergerlevrault.png',
 			          title: 'Berger-Levrault'
 			     });
 				

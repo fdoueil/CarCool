@@ -60,7 +60,8 @@
 		
 		<script type="text/javascript">
 			var geocoder;
-			var locations = ["Saint-Pierre de Lages", "Fonsorbes","Portet-sur-Garonne"];
+			var locationsDrivers = ["Saint-Pierre de Lages", "Fonsorbes","Portet-sur-Garonne","L'Union"];
+			var locationsRiders = ["Caraman", "Montesquieu-Lauragais","Saint-Lys"];
 			var map;
 			
 			function initialize() {
@@ -79,17 +80,25 @@
 			          title: 'Berger-Levrault'
 			     });
 				
-				codeAddress();
+				//codeAddress();
 				
-				plotMarkers();
-				
+				plotDriversMarkers();
+				plotRidersMarkers();
 			}
 	
-			function plotMarkers() {
+			function plotDriversMarkers() {
 				var i;
 	
-				for (i = 0; i < locations.length; i++) {  
-					codeThisAddress(locations[i]);
+				for (i = 0; i < locationsDrivers.length; i++) {  
+					codeThisAddress(locationsDrivers[i],'assets/img/conducteur.png');
+				}
+			}
+			
+			function plotRidersMarkers() {
+				var i;
+	
+				for (i = 0; i < locationsRiders.length; i++) {  
+					codeThisAddress(locationsRiders[i],'assets/img/passager.png');
 				}
 			}
 			
@@ -98,7 +107,7 @@
 				codeThisAddress(address);
 			}
 			
-			function codeThisAddress(thisadress) {
+			function codeThisAddress(thisadress,iconmarker) {
 				
 				geocoder.geocode( { 'address': thisadress}, function(results, status) {
 				  if (status == 'OK') {
@@ -106,6 +115,7 @@
 					var marker = new google.maps.Marker({
 						map: map,
 						position: results[0].geometry.location,
+						icon: iconmarker,
 						title: 'Click Me '
 					});
 					

@@ -43,7 +43,10 @@
 										<input id="address" type="textbox" value="Labège, FR, Rue Edmond Rostand">
 									</div>
 								</div>
-								<div class="col-md-2"></div>
+								<div class="col-md-2">
+									<p><img src="assets/img/conducteur.png" alt="Conducteurs" height="16" width="16">	Conducteurs</p>
+									<p><img src="assets/img/passager.png" alt="Passagers" height="16" width="16">	Passagers</p>
+								</div>
 							</div>
 						</div>
 					</div>

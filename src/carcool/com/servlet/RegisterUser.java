@@ -19,8 +19,8 @@ import carcool.com.model.Utilisateur;
 /**
  * Servlet implementation class Register
  */
-@WebServlet("/register")
-public class Register extends HttpServlet {
+@WebServlet("/registerUser")
+public class RegisterUser extends HttpServlet {
 	private static final String ACTION_FAILED = "Echec de l'inscription";
 	private static final String ACTION_SUCCESS = "Succès de l'inscription";
 	private static final String PARAM_NAME_NAME = "nom";
@@ -34,17 +34,18 @@ public class Register extends HttpServlet {
 	public static String VIEW_PAGES_URL = "/WEB-INF/register.jsp";
 
 	private Map<String, String> errors;
+	
 	private String actionMessage;
 	private String actionResult;
 
 	private HttpSession session;
 	
-	private LogsServlets LOGGER = new LogsServlets (Register.class.getName(),null, Register.class.getName());
+	private LogsServlets LOGGER = new LogsServlets (RegisterUser.class.getName(),null, RegisterUser.class.getName());
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Register() {
+	public RegisterUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -92,6 +93,7 @@ public class Register extends HttpServlet {
 //		User newUser = null;
 
 		String email = request.getParameter(PARAM_NAME_EMAIL);
+		//String pwd1 = RealmBase.Digest(request.getParameter(PARAM_NAME_PWD1),"SHA", pwd1);
 		String pwd1 = request.getParameter(PARAM_NAME_PWD1);
 		String pwd2 = request.getParameter(PARAM_NAME_PWD2);
 		String nom = request.getParameter(PARAM_NAME_NAME);
@@ -102,11 +104,11 @@ public class Register extends HttpServlet {
 		LOGGER.info("L'utilisateur a saisi le nom d'utilisateur: " + nom);
 		LOGGER.info("L'utilisateur a sélectionné comme type d'usager: " + typeusager);
 
+		
 		Utilisateur newUser = new Utilisateur(1, email, pwd1, pwd2, nom);
 		
 		String email_validate = newUser.validateEmail();
 		String password_validate = newUser.validatePwd();
-		// Pas besoin - newUser.validateName();
 
 		actionMessage = ACTION_SUCCESS;
 		actionResult = "1";
@@ -130,7 +132,7 @@ public class Register extends HttpServlet {
 		// OK donc on ajoute l'utilisateur à la liste
 		if (actionResult.equals("1")) {
 			MaDao.getUserDao().getUtilisateurs().add(newUser);
-			LOGGER.info("Utilisateur " + newUser.getNom() + " ajouté à la liste des utilisateurs");
+			LOGGER.info("Utilisateur " + newUser.getNom() + " ajouté à la liste DAO des utilisateurs");
 		}
 		
 		session.setAttribute("users", users);

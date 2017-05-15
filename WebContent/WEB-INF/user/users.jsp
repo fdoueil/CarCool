@@ -51,7 +51,7 @@
 											<tr class="success">
 												<td><c:out value="${user.email}" /></td>
 												<td><c:out value="${user.nom}" /></td>
-												<td><a class="btn btn-primary glyphicon glyphicon-remove" href=<c:url value='/del-user?email='/><c:out value='${user.email}'/>></a></td>
+												<td><a class="btn btn-primary glyphicon glyphicon-remove" href=<c:url value='/deleteUser?email='/><c:out value='${user.email}'/>></a></td>
 											</tr>
 										</c:forEach>
 									</tbody>

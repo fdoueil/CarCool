@@ -26,16 +26,24 @@
 	    		<div class="row">
 					<c:import url="/WEB-INF/menu/menu.jsp"/>
 					<div class="col-md-10">
+						<p></p>
+						<div class="panel-heading">
+							<div class="panel-title text-center">
+								<h2 class="title" style="color: #4d94ff;">Liste des
+									utilisateurs de l'application Covoiturage</h2>
+								<hr />
+							</div>
+						</div>
 						<div class="container">
 							<div class="row">
-								<div class="col-md-1"></div>
-								<div class="col-md-10">
+								<div class="col-md-2"></div>
+								<div class="col-md-8">
 									<div id="map" style="width: 720px; height: 720px;"></div>
 									<div>
 										<input id="address" type="textbox" value="Labège, FR, Rue Edmond Rostand">
 									</div>
 								</div>
-								<div class="col-md-1"></div>
+								<div class="col-md-2"></div>
 							</div>
 						</div>
 					</div>

@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import carcool.com.dao.MaDao;
+import carcool.com.model.PointsDepart;
 import carcool.com.model.PointsDepartUtilisateur;
 import carcool.com.model.Trajet;
 import carcool.com.model.Utilisateur;
@@ -144,7 +145,7 @@ public class MaDaoTest {
 		assertEquals(2, pointsDepartU.size());
 		
 		// 4 points de départ au total
-		List<String> pointsDepart = MaDao.getPointsDepart();
+		List<PointsDepart> pointsDepart = MaDao.getPointsDepart();
 		assertEquals(4, pointsDepart.size());
 	}
 }

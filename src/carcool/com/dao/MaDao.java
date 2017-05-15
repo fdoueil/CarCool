@@ -2,6 +2,8 @@ package carcool.com.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import carcool.com.model.PointsDepart;
 import carcool.com.model.PointsDepartUtilisateur;
 import carcool.com.model.Trajet;
 import carcool.com.model.Utilisateur;
@@ -42,12 +44,12 @@ public class MaDao {
 		return pointsDepartU;
 	}
 	
-	public static List<String> getPointsDepart() {
-		List<String> pointsDepart = new ArrayList<String>();
+	public static List<PointsDepart> getPointsDepart() {
+		List<PointsDepart> pointsDepart = new ArrayList<PointsDepart>();
 		
 		for (Utilisateur utilisateur : userDao.getUtilisateurs()) {
 			for (Trajet trajet : utilisateur.getTrajets()) {
-				pointsDepart.add(trajet.getDepuisAdresse());
+				pointsDepart.add(new PointsDepart(utilisateur.getIdUtilisateur(), utilisateur.getNom(), trajet.getDepuisAdresse()));
 			}
 		}
 		

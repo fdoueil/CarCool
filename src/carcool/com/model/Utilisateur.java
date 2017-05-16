@@ -2,6 +2,7 @@ package carcool.com.model;
 
 import java.util.HashSet;
 
+import carcool.com.enums.Categorie;
 import carcool.com.interfaces.IUserRegisterValidator;
 
 public class Utilisateur implements IUserRegisterValidator{
@@ -11,10 +12,20 @@ public class Utilisateur implements IUserRegisterValidator{
 	private String nom;
 	private String password1;
 	private String password2;
+	private Categorie categorie;
+	
 	private static final String VALIDATE_OK = null;
 	
 	private HashSet<Trajet> trajets;
 	
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -27,6 +38,10 @@ public class Utilisateur implements IUserRegisterValidator{
 		return email;
 	}
 
+	public String getPassword() {
+		return password1;
+	}
+
 	public Utilisateur(int idUtilisateur, String email, String nom, String password1, String password2) {
 		super();
 		this.idUtilisateur = idUtilisateur;
@@ -34,6 +49,8 @@ public class Utilisateur implements IUserRegisterValidator{
 		this.nom = nom;
 		this.password1 = password1;
 		this.password2 = password2;
+		// Par défaut conducteur
+		this.categorie = Categorie.C;
 	}
 
 	public HashSet<Trajet> getTrajets() {

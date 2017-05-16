@@ -31,8 +31,8 @@
 					<p></p>
 					<div class="panel-heading">
 						<div class="panel-title text-center">
-							<h2 class="title" style="color: #FFFFFF;">Liste des
-								utilisateurs</h2>
+							<h2 class="title" style="color: #4d94ff;">Liste des
+								utilisateurs inscrits</h2>
 							<hr />
 						</div>
 					</div>
@@ -44,6 +44,7 @@
 						                <tr class="bg-primary">
 						                	<th>Email</th>
 						                	<th>Name</th>
+						                	<th>Catégorie</th>
 						                </tr>
 						            </thead>
 						            <tbody>
@@ -51,7 +52,8 @@
 											<tr class="success">
 												<td><c:out value="${user.email}" /></td>
 												<td><c:out value="${user.nom}" /></td>
-												<td><a class="btn btn-primary glyphicon glyphicon-remove" href=<c:url value='/deleteUser?email='/><c:out value='${user.email}'/>></a></td>
+												<td><c:out value="${user.categorie}" /></td>
+												<td><a class="btn btn-primary glyphicon glyphicon-user" href=<c:url value='/viewprofileuser?email='/><c:out value='${user.email}'/>></a></td>
 											</tr>
 										</c:forEach>
 									</tbody>

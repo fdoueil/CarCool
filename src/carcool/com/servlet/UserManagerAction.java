@@ -43,7 +43,7 @@ public class UserManagerAction extends HttpServlet {
 			users = MaDao.getUserDao().getUtilisateurs();
 			session.setAttribute("users", users);
 		}
-		//response.getWriter().append("													Compte:" + String.valueOf(users.size()));
+		//response.getWriter().append("Compte:" + String.valueOf(users.size()));
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
 

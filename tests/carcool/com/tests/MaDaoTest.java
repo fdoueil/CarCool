@@ -148,4 +148,11 @@ public class MaDaoTest {
 		List<PointsDepart> pointsDepart = MaDao.getPointsDepart();
 		assertEquals(4, pointsDepart.size());
 	}
+	
+	@Test
+	public void testExisteUtilisateurDao() {
+		MaDao.getUserDao().getUtilisateurs().add(new Utilisateur(1, "f@f.com", "Zzz&eeZZ", "Zzz&eeZZ", "FDoueil"));
+		assertFalse(MaDao.getUserDao().existUser("g@g.com", "Mypassword"));
+		assertTrue(MaDao.getUserDao().existUser("f@f.com", "Zzz&eeZZ"));
+	}
 }

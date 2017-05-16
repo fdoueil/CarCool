@@ -50,4 +50,19 @@ public class UserDao {
 		
 		return ret;
 	}
+	
+	public boolean existUser(String email, String password) {
+		boolean ret=false;
+		
+		Iterator<Utilisateur> iterator = utilisateurs.iterator();
+		while (iterator.hasNext()) {
+			Utilisateur element = iterator.next();
+			if (element.getEmail().equals(email) && element.getPassword().equals(password)) {
+				ret=true;
+				break;
+			}
+		}
+		
+		return ret;
+	}
 }

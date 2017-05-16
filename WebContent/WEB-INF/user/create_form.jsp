@@ -79,7 +79,7 @@
 					<span class="input-group-addon"><i class="fa fa-users fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="latitude" id="latitude" placeholder="Saisissez votre latitude"
-						value="${newUser.latitude}" />
+						value="${newTrajet.latDepart}" />
 				</div>
 			<label for="longitude" class="cols-sm-3 control-label">Longitude</label>
 			<div class="cols-sm-10">
@@ -87,7 +87,7 @@
 					<span class="input-group-addon"><i class="fa fa-users fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="longitude" id="longitude" placeholder="Saisissez votre longitude"
-						value="${newUser.latitude}" />
+						value="${newTrajet.longDepart}" />
 				</div>
 			</div>
 		</div>

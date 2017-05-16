@@ -166,6 +166,9 @@ public class RegisterUser extends HttpServlet {
 		
 		// Champs déjà saisi mail + name (on doit pas les perdre)
 		request.setAttribute("newUser", newUser);
+		newTrajet.setLatDepart(Double.parseDouble(latitude));
+		newTrajet.setLongDepart(Double.parseDouble(longitude));
+		
 		request.setAttribute("newTrajet", newTrajet);
 		
 		request.setAttribute("errors", errors);

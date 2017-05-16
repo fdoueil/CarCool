@@ -120,16 +120,21 @@
                     icon: icone,
                     map: map
                 });
-                // process multiple info windows
-                (function(marker) {
-                    // add click event
-                    google.maps.event.addListener(marker, 'mouseover', function() {
-                        infowindow = new google.maps.InfoWindow({
-                            content: nom                                         
-                        });
-                        infowindow.open(map, marker);
-                    });
-                })(marker);
+                
+//                =======================
+//                |Ajout des info-bulles|
+//                =======================
+//
+//                 // process multiple info windows
+//                 (function(marker) {
+//                     // add click event
+//                     google.maps.event.addListener(marker, 'mouseover', function() {
+//                         infowindow = new google.maps.InfoWindow({
+//                             content: nom                                         
+//                         });
+//                         infowindow.open(map, marker);
+//                     });
+//                 })(marker);
             }
  
 	        function geocodeAddress() {
@@ -142,6 +147,16 @@
 	             map: resultsMap,
 	             position: results[0].geometry.location
 	             });
+	             var cityCircle = new google.maps.Circle({
+	            	 //strokeColor: '#FF0000',
+	                 //strokeOpacity: 0.8,
+	                 //strokeWeight: 2,
+	                 //fillColor: '#FF0000',
+	                 //fillOpacity: 0.35,
+	            	 map: resultsMap,
+	                 center: results[0].geometry.location,
+	                 radius: 5000
+	               });
 	        } else {
 	             alert('Google Map ne peut pas géolocaliser cette adresse: ' + status);
 	              }

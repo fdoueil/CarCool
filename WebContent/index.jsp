@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCW_E-FQsQOcbgaiNYj7PSZ_JTzICvZQ&callback=initMap" async defer></script>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
     
@@ -39,9 +38,11 @@
                                 <div class="col-md-2"></div>
                                 <div class="col-md-8">
                                     <div id="map" style="width: 720px; height: 720px;"></div>
-                                    <div>
-                                        <input id="address" type="textbox" value="Labège, FR, Rue Edmond Rostand">
-                                    </div>
+	                                    <div id="floating-panel">
+								        Votre adresse: 
+								        <input id="address" type="textbox" value="">
+								        <input id="submit" type="button" value="Localiser" onClick="geocodeAddress();">
+							        </div>
                                 </div>
                                 <div class="col-md-2">
                                     <p><img src="assets/img/conducteur.png" alt="Conducteurs" height="16" width="16">   Conducteurs</p>
@@ -62,8 +63,11 @@
         
         <c:import url="/WEB-INF/footer/footer.html"/>
         
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCW_E-FQsQOcbgaiNYj7PSZ_JTzICvZQ&callback=initMap"
+        async defer></script>
+        
         <script type="text/javascript">
-            var geocoder;
+            
             var locationsDrivers = [
               ['Cugnaux', 43.537373, 1.344962, 'François Hollande'],
               ['Balma', 43.606163, 1.500060, 'Jérome Cahuzac'],
@@ -74,16 +78,15 @@
               ['Escalquens', 43.518855, 1.553071, 'Lolo Aibo']
             ];
             var map;
-            
+            var geocoder;
             function initialize() {
-                geocoder = new google.maps.Geocoder();
                 var blLatLng = {lat: 43.541252, lng: 1.511911};
                 var mapOptions = {
                   zoom: 11,
                   center: blLatLng
                 }
-                map = new google.maps.Map(document.getElementById('map'), mapOptions);
                 
+                map = new google.maps.Map(document.getElementById('map'), mapOptions);
                 var blMarker = new google.maps.Marker({
                       position: blLatLng,
                       map: map,
@@ -92,14 +95,13 @@
                  });
                 
                 //codeAddress();
-                
                 plotDriversMarkers();
                 plotRidersMarkers();
+                geocoder = new google.maps.Geocoder();
             }
     
             function plotDriversMarkers() {
                 var i;
-    
                 for (i = 0; i < locationsDrivers.length; i++) {  
                     codeThisMarker(locationsDrivers[i][1], locationsDrivers[i][2],'assets/img/conducteur.png', locationsDrivers[i][3]);
                 }
@@ -107,25 +109,17 @@
             
             function plotRidersMarkers() {
                 var i;
-    
                 for (i = 0; i < locationsRiders.length; i++) {  
                     codeThisMarker(locationsRiders[i][1], locationsRiders[i][2],'assets/img/passager.png', locationsRiders[i][3]);
                 }
             }
-            
-            function codeAddress() {
-                var address = document.getElementById('address').value;
-                codeThisAddress(address);
-            }
 
             function codeThisMarker(latitude, longitude, icone, nom) {
-                
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(latitude, longitude),
                     icon: icone,
                     map: map
                 });
-                
                 // process multiple info windows
                 (function(marker) {
                     // add click event
@@ -136,52 +130,26 @@
                         infowindow.open(map, marker);
                     });
                 })(marker);
-            
-            /* ANCIENNE FONCTION UTILISANT LE GEOCODER
-               =======================================
-            function codeThisAddress(thisadress,iconmarker) {
-                
-                geocoder.geocode( { 'address': thisadress}, function(results, status) {
-                  if (status == 'OK') {
-                    map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location,
-                        icon: iconmarker,
-                        title: 'Click Me '
-                    });
-                    
-                    // process multiple info windows
-                    (function(marker) {
-                        // add click event
-                        google.maps.event.addListener(marker, 'click', function() {
-                            infowindow = new google.maps.InfoWindow({
-                                content: 'Hello, World!!'
-                            });
-                            infowindow.open(map, marker);
-                        });
-                    })(marker);
-           
-
-                  } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                  }
-                }); */
             }
-            
-            /*function AutoCenter() {
-              //  Create a new viewpoint bound
-              var bounds = new google.maps.LatLngBounds();
-              //  Go through each...
-              $.each(markers, function (index, marker) {
-              bounds.extend(marker.position);
-              });
-              //  Fit these bounds to the map
-              map.fitBounds(bounds);
-            }
-            AutoCenter();*/
+ 
+	        function geocodeAddress() {
+	        	 var resultsMap = map;
+	         	 var address = document.getElementById('address').value;
+	        	 geocoder.geocode({'address': address}, function(results, status) {
+	             if (status === 'OK') {
+	             resultsMap.setCenter(results[0].geometry.location);
+	             var marker = new google.maps.Marker({
+	             map: resultsMap,
+	             position: results[0].geometry.location
+	             });
+	        } else {
+	             alert('Google Map ne peut pas géolocaliser cette adresse: ' + status);
+	              }
+	            });
+          }
     
       </script>
+
     </body>
 
 </html>

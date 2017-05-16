@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="pwd1" class="cols-sm-3 control-label">Mot de
+			<label for="password1" class="cols-sm-3 control-label">Mot de
 				passe</label>
 			<div class="cols-sm-10">
 				<div class="input-group">
@@ -32,7 +32,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="pwd2" class="cols-sm-3 control-label">Confirmation
+			<label for="password2" class="cols-sm-3 control-label">Confirmation
 				du mot de passe</label>
 			<div class="cols-sm-10">
 				<div class="input-group">
@@ -48,7 +48,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="name" class="cols-sm-3 control-label">Nom
+			<label for="nom" class="cols-sm-3 control-label">Nom
 				d'utilisateur</label>
 			<div class="cols-sm-10">
 				<div class="input-group">
@@ -56,6 +56,38 @@
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="nom" id="nom" placeholder="Entrez le nom d'utilisateur"
 						value="${newUser.nom}" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="adresse" class="cols-sm-3 control-label">Adresse</label>
+			<div class="cols-sm-10">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-users fa"
+						aria-hidden="true"></i></span> <input type="text" class="form-control"
+						name="adresse" id="adresse" placeholder="Saisissez votre adresse"
+						value="${newTrajet.depuisAdresse}" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="latitude" class="cols-sm-3 control-label">Latitude</label>
+			<div class="cols-sm-10">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-users fa"
+						aria-hidden="true"></i></span> <input type="text" class="form-control"
+						name="latitude" id="latitude" placeholder="Saisissez votre latitude"
+						value="${newUser.latitude}" />
+				</div>
+			<label for="longitude" class="cols-sm-3 control-label">Longitude</label>
+			<div class="cols-sm-10">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-users fa"
+						aria-hidden="true"></i></span> <input type="text" class="form-control"
+						name="longitude" id="longitude" placeholder="Saisissez votre longitude"
+						value="${newUser.latitude}" />
 				</div>
 			</div>
 		</div>
@@ -71,6 +103,9 @@
 						<label><input type="radio"
 						class=".radio-inline" name="typeusager" id="typeusager" value="Passager"
 						> Passager </label>
+						<label><input type="radio"
+						class=".radio-inline" name="typeusager" id="typeusager" value="LesDeux"
+						> Les deux </label>
 						
 				</div>
 			</div>

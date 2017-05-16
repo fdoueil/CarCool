@@ -10,7 +10,7 @@ public class LogsServlets extends Logger {
 	private String fichierLog;
 	Handler consoleHandler = null;
 
-	protected LogsServlets(String nomServlet, String resourceBundleName, String fichierLog) {
+	public LogsServlets(String nomServlet, String resourceBundleName, String fichierLog) {
 		super(nomServlet, resourceBundleName);
 		this.nomServlet = nomServlet;
 		this.fichierLog = fichierLog;

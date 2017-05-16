@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>Car-Cool</display-name>
- 
-  <!-- <servlet>
-    <description>Servlet d'authentification</description>
-    <servlet-name>authentification</servlet-name>
-    <servlet-class>
-		carcool.com.servlet.Authentificate
-	</servlet-class>
-    <security-role-ref>
-      <role-name>cond</role-name>
-      <role-link>conducteur</role-link>
-    </security-role-ref>
-    <security-role-ref>
-      <role-name>pass</role-name>
-      <role-link>passager</role-link>
-    </security-role-ref>
-  </servlet>-->
-  
   <security-constraint>
     <display-name>Securite_utilisateurs_authentifies</display-name>
     <web-resource-collection>
@@ -27,10 +10,9 @@
       <url-pattern> /updateUser </url-pattern>
     </web-resource-collection>
     <auth-constraint>
-    	<role-name>authentifies</role-name>
+      <role-name>authentifies</role-name>
     </auth-constraint>
   </security-constraint>
-  
   <login-config>
     <auth-method>FORM</auth-method>
     <realm-name>Identifiants</realm-name>
@@ -40,13 +22,21 @@
     </form-login-config>
   </login-config>
 
-  <!--<security-role>
-    <role-name>conducteur</role-name>
-  </security-role>
-  <security-role>
-    <role-name>passager</role-name>
-  </security-role>-->
-
+<!-- <servlet>
+  	<servlet-name>DeleteUser</servlet-name>
+  	<servlet-class>carcool.com.servlet.DeleteUser</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>DeleteUser</servlet-name>
+  	<url-pattern>/deleteUser</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+  	<filter-name></filter-name>
+  	<filter-class>VerifyAuthentification</filter-class>
+  </filter>-->
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

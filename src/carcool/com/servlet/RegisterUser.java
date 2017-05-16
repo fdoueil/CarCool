@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import carcool.com.dao.MaDao;
+import carcool.com.model.Trajet;
 import carcool.com.model.Utilisateur;
 
 
@@ -27,6 +28,10 @@ public class RegisterUser extends HttpServlet {
 	private static final String PARAM_NAME_PWD2 = "password2";
 	private static final String PARAM_NAME_PWD1 = "password1";
 	private static final String PARAM_NAME_EMAIL = "email";
+	private static final String PARAM_NAME_ADDRESS = "adresse";
+	private static final String PARAM_NAME_LONG = "longitude";
+	private static final String PARAM_NAME_LAT = "latitude";
+	
 	
 	private static final String PARAM_TYPE_USAGER = "typeusager";
 	
@@ -97,15 +102,25 @@ public class RegisterUser extends HttpServlet {
 		String pwd1 = request.getParameter(PARAM_NAME_PWD1);
 		String pwd2 = request.getParameter(PARAM_NAME_PWD2);
 		String nom = request.getParameter(PARAM_NAME_NAME);
+		String adresse = request.getParameter(PARAM_NAME_ADDRESS); 
+		String latitude = request.getParameter(PARAM_NAME_LONG);
+		String longitude = request.getParameter(PARAM_NAME_LAT);
 		String typeusager = request.getParameter(PARAM_TYPE_USAGER);
 		
 		LOGGER.info("L'utilisateur a saisi l'email: " + email);
 		LOGGER.info("L'utilisateur a saisi le mot de passe: " + pwd1);
 		LOGGER.info("L'utilisateur a saisi le nom d'utilisateur: " + nom);
 		LOGGER.info("L'utilisateur a sélectionné comme type d'usager: " + typeusager);
+		LOGGER.info("L'utilisateur a sélectionné comme adresse: " + adresse);
+		LOGGER.info("L'utilisateur a sélectionné comme latitude: " + latitude);
+		LOGGER.info("L'utilisateur a sélectionné comme longitude: " + longitude);
 
-		
-		Utilisateur newUser = new Utilisateur(1, email, pwd1, pwd2, nom);
+	
+		if (MaDao.getUserDao().getUtilisateurs()==null){
+			MaDao.getUserDao().setUsers(new HashSet<Utilisateur>());
+		}
+		int identifiantUtilisateur = MaDao.getUserDao().getUtilisateurs().size()+1;
+		Utilisateur newUser = new Utilisateur(identifiantUtilisateur, email, nom, pwd1, pwd2);
 		
 		String email_validate = newUser.validateEmail();
 		String password_validate = newUser.validatePwd();
@@ -129,9 +144,21 @@ public class RegisterUser extends HttpServlet {
 			actionResult = "0";
 		}
 		
+		Trajet newTrajet = null;
+		
 		// OK donc on ajoute l'utilisateur à la liste
 		if (actionResult.equals("1")) {
+			//Ajout de l'utilisateur à la DAO
 			MaDao.getUserDao().getUtilisateurs().add(newUser);
+			//Ajout de trajets à l'utilisateur
+			Utilisateur user = MaDao.getUserDao().getUserById(identifiantUtilisateur);
+			// Création d'un trajet
+			HashSet<Trajet> trajetsUtilisateur = new HashSet<Trajet>();
+			//Trajet domicile-travail
+			newTrajet= new Trajet(identifiantUtilisateur,adresse,"Labège, Rue Edmond Rostand",0,null,null,null);
+			trajetsUtilisateur.add(newTrajet);
+			user.setTrajets(trajetsUtilisateur);
+			
 			LOGGER.info("Utilisateur " + newUser.getNom() + " ajouté à la liste DAO des utilisateurs");
 		}
 		
@@ -139,6 +166,7 @@ public class RegisterUser extends HttpServlet {
 		
 		// Champs déjà saisi mail + name (on doit pas les perdre)
 		request.setAttribute("newUser", newUser);
+		request.setAttribute("newTrajet", newTrajet);
 		
 		request.setAttribute("errors", errors);
 		request.setAttribute("actionMessage", actionMessage);

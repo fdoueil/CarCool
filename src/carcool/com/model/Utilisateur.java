@@ -27,6 +27,10 @@ public class Utilisateur implements IUserRegisterValidator{
 		return email;
 	}
 
+	public String getPassword() {
+		return password1;
+	}
+
 	public Utilisateur(int idUtilisateur, String email, String nom, String password1, String password2) {
 		super();
 		this.idUtilisateur = idUtilisateur;

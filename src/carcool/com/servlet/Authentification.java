@@ -3,6 +3,7 @@ package carcool.com.servlet;
 import java.io.IOException;
 import java.util.HashSet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -46,19 +47,35 @@ public class Authentification extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+
+		//Définition du type de contenu de la réponse
+		response.setContentType("text/html");
+		
 		LOGGER.logger_begin(LOGGER.getName());
+		
+		//Récupération des informations du formulaire
 		String email = request.getParameter(PARAM_NAME_EMAIL);
 		String password = request.getParameter(PARAM_NAME_PWD);
 		
 		LOGGER.info("Mail d'authentification saisi par l'utilisateur: " + email);
 		LOGGER.info("Mot de passe saisi par l'utilisateur: " + password);
 		
+		//Récupération de la liste des utilisateurs
 		HashSet<Utilisateur> utilisateursEnregistres = MaDao.getUserDao().getUtilisateurs();
-		for (Utilisateur utilisateur : utilisateursEnregistres) {
-			if(utilisateur.getEmail().equals(email)){
-				if("motDePasse".equals(password)){
-					//Authentification réussie. On crée un Cookie
+		//Si j'ai une liste d'utilisateurs
+		if (utilisateursEnregistres.size()>0){
+			
+			//Recherche d'un utilisateur correspondant aux informations récupérées dans le formulaire		
+			Utilisateur utilisateur = utilisateursEnregistres.iterator().next();
+			while (!utilisateur.getEmail().equals(email) || !utilisateur.getPassword().equals(password)) {
+				if (utilisateursEnregistres.iterator().hasNext()) {
+					utilisateur = utilisateursEnregistres.iterator().next();
+				}
+			}
+			
+			// L'utilisateur a été trouvé
+			if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(password)){
+					//On crée un Cookie
 					Cookie cookie = new Cookie("usermail", email);
 					cookie.setVersion(1);
 					cookie.setComment("Authentification OK");
@@ -66,10 +83,24 @@ public class Authentification extends HttpServlet {
 					cookie.setHttpOnly(true);
 					response.addCookie(cookie);
 					
-					//Pour afficher le nom d'utilisateur dans l'interface
-					
-				}
+					//On renvoie l'utilisateur à l'index avec message de bienvenue
+					RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
+		            rd.forward(request, response); 
+		            LOGGER.info("Utilisateur trouvé");
 			}
+			// L'utilisateur n'a pas été trouvé
+			else {
+				//On retourne à l'authtentification avec un message d'erreur
+				RequestDispatcher rd=request.getRequestDispatcher("authentification_error.jsp");  
+	            rd.forward(request, response);  
+	            LOGGER.info("Utilisateur non trouvé");
+			}
+		}
+		else {
+			//On retourne à l'authtentification avec un message d'erreur
+			RequestDispatcher rd=request.getRequestDispatcher("authentification_error.jsp");  
+            rd.forward(request, response);
+            LOGGER.info("Utilisateur non trouvé");
 		}
 		LOGGER.logger_end();
 	}

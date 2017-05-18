@@ -24,7 +24,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/user/authentification_form.jsp" /> 
-	<label class="sr-only">Nom d'utilisateur ou mot de passe invalide.</label><br />
-	<label class="sr-only">Veuillez essayer à nouveau de vous authentifier.</label><br />
+	<label class="sr-only" style="color: #4d94ff;">Nom d'utilisateur ou mot de passe invalide.</label><br />
+	<label class="sr-only" style="color: #4d94ff;">Veuillez essayer à nouveau de vous authentifier.</label><br />
 </body>
 </html>

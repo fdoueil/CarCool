@@ -29,7 +29,7 @@
 						<p></p>
 						<div class="panel-heading">
 			               <div class="panel-title text-center">
-			               		<h2 class="title" style="color: #FFFFFF;">Créer un nouvel utilisateur</h2>
+			               		<h2 class="title" style="color: #4d94ff;">Créer un nouvel utilisateur</h2>
 			               		<hr />
 			               	</div>
 			            </div> 

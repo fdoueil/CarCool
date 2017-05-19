@@ -44,12 +44,12 @@ public class LogsServlets extends Logger {
 		consoleHandler.setLevel(Level.ALL);
 		this.setLevel(Level.ALL);
 
-		this.config("Début du suivi de la Servlet.");
+		this.config("Début du suivi de la Servlet " + this.getNomServlet());
 
 	}
 
 	public void logger_end() {
-		this.config("Fin du suivi de la Servlet.");
+		this.config("Fin du suivi de la Servlet " + this.getNomServlet());
 		this.removeHandler(consoleHandler);
 	}
 }

@@ -2,6 +2,7 @@ package carcool.com.servlet;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,33 +61,54 @@ public class Authentification extends HttpServlet {
 		LOGGER.info("Mail d'authentification saisi par l'utilisateur: " + email);
 		LOGGER.info("Mot de passe saisi par l'utilisateur: " + password);
 		
+		LOGGER.info("Début récupération liste utilisateurs.");
 		//Récupération de la liste des utilisateurs
 		HashSet<Utilisateur> utilisateursEnregistres = MaDao.getUserDao().getUtilisateurs();
+		LOGGER.info("Fin récupération liste utilisateurs.");
 		//Si j'ai une liste d'utilisateurs
-		if (utilisateursEnregistres.size()>0){
-			
+		
+		LOGGER.info("Début recherche utilisateur.");
+		if (!utilisateursEnregistres.isEmpty()){
+
 			//Recherche d'un utilisateur correspondant aux informations récupérées dans le formulaire		
-			Utilisateur utilisateur = utilisateursEnregistres.iterator().next();
-			while (!utilisateur.getEmail().equals(email) || !utilisateur.getPassword().equals(password)) {
-				if (utilisateursEnregistres.iterator().hasNext()) {
-					utilisateur = utilisateursEnregistres.iterator().next();
+			//Utilisateur utilisateur = null;
+			Iterator user_iterator = utilisateursEnregistres.iterator();
+			boolean utilisateurTrouve=false;
+			
+			LOGGER.info("Début boucle for");
+			for (Utilisateur utilisateur : utilisateursEnregistres) {
+				LOGGER.info("Boucle for: Traitement sur l'utilisateur " + utilisateur.getNom()
+				+". Email: " + utilisateur.getEmail() 
+				+ ". Mot de passe: " + utilisateur.getPassword() + ".");
+				if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(password)){
+					utilisateurTrouve=true;
+					request.setAttribute("authUser", utilisateur);
+					break;
 				}
 			}
+			LOGGER.info("Fin boucle for");
+
 			
 			// L'utilisateur a été trouvé
-			if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(password)){
-					//On crée un Cookie
+			if(utilisateurTrouve){
+					//On crée un Cookie pour les communications suivantes
 					Cookie cookie = new Cookie("usermail", email);
 					cookie.setVersion(1);
 					cookie.setComment("Authentification OK");
-					cookie.setMaxAge(900); //Cookie conservé pendant 15 minutes
+					cookie.setMaxAge(-1); //Cookie conservé pendant 15 minutes
 					cookie.setHttpOnly(true);
 					response.addCookie(cookie);
 					
-					//On renvoie l'utilisateur à l'index avec message de bienvenue
+		            //On ajoute utilisateurTrouve pour exploitation dans la jsp afin d'afficher le message de bienvenue.
+		            request.setAttribute("findUser", utilisateurTrouve);
+		            
+		            
+					//On renvoie l'utilisateur à l'index avec ajout du message de bienvenue
 					RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
 		            rd.forward(request, response); 
 		            LOGGER.info("Utilisateur trouvé");
+		            
+
 			}
 			// L'utilisateur n'a pas été trouvé
 			else {
@@ -98,10 +120,11 @@ public class Authentification extends HttpServlet {
 		}
 		else {
 			//On retourne à l'authtentification avec un message d'erreur
-			RequestDispatcher rd=request.getRequestDispatcher("authentification_error.jsp");  
-            rd.forward(request, response);
+			RequestDispatcher rd=request.getRequestDispatcher("authentification.jsp");  
+            rd.include(request, response);
             LOGGER.info("Utilisateur non trouvé");
 		}
+		LOGGER.info("Fin recherche utilisateur.");
 		LOGGER.logger_end();
 	}
 

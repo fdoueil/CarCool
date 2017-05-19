@@ -32,6 +32,11 @@
                                     utilisateurs de l'application Covoiturage</h2>
                                 <hr />
                             </div>
+                            <c:if test="${findUser=='true'}">
+								<div class="panel-title text-center">
+									<span style="color: #4d94ff;">Bienvenue ${authUser.getNom()}</span><br />
+								</div>
+							</c:if>	
                         </div>
                         <div class="container">
                             <div class="row">

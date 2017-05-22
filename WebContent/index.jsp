@@ -46,6 +46,8 @@
 	                                    <div id="floating-panel">
 								        Votre adresse: 
 								        <input id="address" type="textbox" value="">
+								        Rayon de recherche:
+								        <input id="rayon" type="textbox" value="">
 								        <input id="submit" type="button" value="Localiser" onClick="geocodeAddress();">
 							        </div>
                                 </div>
@@ -145,6 +147,7 @@
 	        function geocodeAddress() {
 	        	 var resultsMap = map;
 	         	 var address = document.getElementById('address').value;
+	         	 var rayonEnMetres = (document.getElementById('rayon').value)*1000;
 	        	 geocoder.geocode({'address': address}, function(results, status) {
 	             if (status === 'OK') {
 	             resultsMap.setCenter(results[0].geometry.location);
@@ -160,7 +163,7 @@
 	                 //fillOpacity: 0.35,
 	            	 map: resultsMap,
 	                 center: results[0].geometry.location,
-	                 radius: 5000
+	                 radius: rayonEnMetres
 	               });
 	        } else {
 	             alert('Google Map ne peut pas géolocaliser cette adresse: ' + status);

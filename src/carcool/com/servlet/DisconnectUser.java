@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class DisconnectUser
@@ -13,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/deconnexion")
 public class DisconnectUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private HttpSession session;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,8 +29,12 @@ public class DisconnectUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Supprime le user
-		String email = request.getParameter("email");
+		//String email = request.getParameter("email");
 		//System.out.println(email);
+		
+		// Deconnexion en session
+		session = request.getSession();
+		session.setAttribute("utilisateurConnecte", "0");
 		
 		//Retour accueil
 		this.getServletContext().getRequestDispatcher("/").forward(request, response);

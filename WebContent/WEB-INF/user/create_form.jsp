@@ -64,7 +64,7 @@
 			<label for="adresse" class="cols-sm-3 control-label">Adresse</label>
 			<div class="cols-sm-10">
 				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-users fa"
+					<span class="input-group-addon"><i class="fa fa-map-marker fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="adresse" id="adresse" placeholder="Saisissez votre adresse"
 						value="${newTrajet.depuisAdresse}" />
@@ -76,7 +76,7 @@
 			<label for="latitude" class="cols-sm-3 control-label">Latitude</label>
 			<div class="cols-sm-10">
 				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-users fa"
+					<span class="input-group-addon"><i class="fa fa-map-pin fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="latitude" id="latitude" placeholder="Saisissez votre latitude"
 						value="${newTrajet.latDepart}" />
@@ -84,7 +84,7 @@
 			<label for="longitude" class="cols-sm-3 control-label">Longitude</label>
 			<div class="cols-sm-10">
 				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-users fa"
+					<span class="input-group-addon"><i class="fa fa-map-pin fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="longitude" id="longitude" placeholder="Saisissez votre longitude"
 						value="${newTrajet.longDepart}" />

@@ -95,7 +95,7 @@ public class Authentification extends HttpServlet {
 					Cookie cookie = new Cookie("usermail", email);
 					cookie.setVersion(1);
 					cookie.setComment("Authentification OK");
-					cookie.setMaxAge(-1); //Cookie conservé pendant 15 minutes
+					cookie.setMaxAge(-1); //Cookie conservé pendant toute la session
 					cookie.setHttpOnly(true);
 					response.addCookie(cookie);
 					

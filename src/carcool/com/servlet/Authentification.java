@@ -85,7 +85,7 @@ public class Authentification extends HttpServlet {
 				+ ". Mot de passe: " + utilisateur.getPassword() + ".");
 				if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(password)){
 					utilisateurTrouve=true;
-					request.setAttribute("authUser", utilisateur);
+					session.setAttribute("authUser", utilisateur);
 					break;
 				}
 			}

@@ -18,7 +18,7 @@
 				<li><a href=<c:url value='/registerUser'/>>Créer un compte</a></li>	
 				<li><a href=<c:url value='/authentification.jsp'/>>Connexion à mon espace</a></li>			
 				<c:if test="${utilisateurConnecte=='1'}">
-					<li><a href=<c:url value='/deconnexion'/>>Deconnexion</a></li>	
+					<li><a href=<c:url value='/deconnexion'/>>Déconnexion</a></li>	
 					<li><a href=<c:url value='/users'/>>Afficher la liste des utilisateurs</a></li>
 					<li><a href=<c:url value='/deleteUser'/>>Supprimer mon compte</a></li>
 					<li><a href=<c:url value='/updateUser'/>>Modifier mon compte</a></li>

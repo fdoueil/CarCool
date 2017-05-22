@@ -16,7 +16,6 @@
 		<!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-
 		<title>Register</title>
 	</head>
 	<body>
@@ -51,8 +50,30 @@
     	<script src="assets/js/jquery.backstretch.min.js"></script>
     	<script src="assets/js/scripts.js"></script>
     	<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    	        
+        <c:import url="/WEB-INF/footer/footer.html"/>
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCW_E-FQsQOcbgaiNYj7PSZ_JTzICvZQ"
+        async defer></script>
+        
+<!--         <script type="text/javascript"> -->
+        	
+// 	    	$(document).ready(function() {
+	    		
+// 	    		$('#adresse').blur(function() {
+// 	    			var geocoder = new google.maps.Geocoder();
+// 	    			var address = document.getElementById('addresse').value;
+// 	    	        geocoder.geocode({'address': address}, function(results, status) {
+// 	    	        	if (status === 'OK') {
+// 	    	        		$('#latitude').text(results[0].geometry.location.lat());
+// 	    	        		$('#longitude').text(results[0].geometry.location.lng());
+// 	    	        	}
+// 	    	        });
+// 	    		});
+// 	    	});
     	
-    	<c:import url="/WEB-INF/footer/footer.html"/>
+<!--     	</script> -->
+
 	</body>
 
 </html>

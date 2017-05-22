@@ -11,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import carcool.com.dao.MaDao;
 import carcool.com.model.Utilisateur;
@@ -26,6 +27,7 @@ public class Authentification extends HttpServlet {
 	private final String PARAM_NAME_PWD = "password";
     
 	private LogsServlets LOGGER = new LogsServlets (Authentification.class.getName(),null, Authentification.class.getName());
+	private HttpSession session;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -47,8 +49,9 @@ public class Authentification extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
+		session = request.getSession();
+		
 		//Définition du type de contenu de la réponse
 		response.setContentType("text/html");
 		
@@ -102,7 +105,7 @@ public class Authentification extends HttpServlet {
 		            //On ajoute utilisateurTrouve pour exploitation dans la jsp afin d'afficher le message de bienvenue.
 		            request.setAttribute("findUser", utilisateurTrouve);
 		            // Ajouts des sous-menus
-		            request.setAttribute("utilisateurConnecte", "1");
+		            session.setAttribute("utilisateurConnecte", "1");
 		            
 					//On renvoie l'utilisateur à l'index avec ajout du message de bienvenue
 					RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  

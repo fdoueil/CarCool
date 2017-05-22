@@ -38,14 +38,12 @@ public class UserManagerAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		session = request.getSession();
-		String utilisateurConnecte = (String) request.getAttribute("utilisateurConnecte");
 		
 		HashSet<Utilisateur> users = (HashSet<Utilisateur>)session.getAttribute("users");
 		if (users==null) {
 			users = MaDao.getUserDao().getUtilisateurs();
 			session.setAttribute("users", users);
 		}
-		request.setAttribute("utilisateurConnecte", utilisateurConnecte);
 		//response.getWriter().append("Compte:" + String.valueOf(users.size()));
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}

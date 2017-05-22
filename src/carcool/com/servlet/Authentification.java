@@ -101,14 +101,14 @@ public class Authentification extends HttpServlet {
 					
 		            //On ajoute utilisateurTrouve pour exploitation dans la jsp afin d'afficher le message de bienvenue.
 		            request.setAttribute("findUser", utilisateurTrouve);
-		            
+		            // Ajouts des sous-menus
+		            request.setAttribute("utilisateurConnecte", "1");
 		            
 					//On renvoie l'utilisateur à l'index avec ajout du message de bienvenue
 					RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
 		            rd.forward(request, response); 
 		            LOGGER.info("Utilisateur trouvé");
-		            
-
+		            		            
 			}
 			// L'utilisateur n'a pas été trouvé
 			else {

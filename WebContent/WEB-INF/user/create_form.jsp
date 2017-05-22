@@ -10,7 +10,7 @@
 			<button type="submit"
 				class="btn btn-primary btn-lg btn-block login-button">Enregistrer</button>
 		</div>
-		<!--  <div class="form-group ">
+		  <div class="form-group ">
 			<div class="cols-sm-10" style="color: #0033cc; text-align: center">${actionMessage}</div>
-		</div> -->
+		</div>
 	</form>

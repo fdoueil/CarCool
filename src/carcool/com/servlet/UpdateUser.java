@@ -1,12 +1,16 @@
 package carcool.com.servlet;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import carcool.com.model.Trajet;
+import carcool.com.model.Utilisateur;
 
 /**
  * Servlet implementation class UpdateUser
@@ -41,6 +45,10 @@ public class UpdateUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Utilisateur newUser=(Utilisateur)request.getSession().getAttribute("authUser");
+		request.setAttribute("newUser", newUser);
+		Trajet newTrajet=((Trajet)newUser.getTrajets().toArray()[0]);
+		request.setAttribute("newTrajet", newTrajet);
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
 

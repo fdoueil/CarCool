@@ -56,7 +56,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCW_E-FQsQOcbgaiNYj7PSZ_JTzICvZQ"
         async defer></script>
         
-<!--         <script type="text/javascript"> -->
+<!--         <script type="text/javascript"> 
         	
 // 	    	$(document).ready(function() {
 	    		
@@ -72,7 +72,7 @@
 // 	    		});
 // 	    	});
     	
-<!--     	</script> -->
+     	</script> -->
 
 	</body>
 

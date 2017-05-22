@@ -7,7 +7,7 @@
 						aria-hidden="true"></i></span> <input type="email" required="true"
 						pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
 						title="xxxx@xxxx.xxx" class="form-control" name="email" id="email"
-						placeholder="Entrez votre adresse email" value="${newUser.email}" />
+						placeholder="Entrez votre adresse email" value="${newUser.getEmail()}" />
 				</div>
 				<span class="error text-danger">${errors['email']}</span>
 				<!--<div style="color: #FF0000;">${errors['email']}</div>-->
@@ -22,7 +22,7 @@
 					<span class="input-group-addon"><i class="fa fa-lock fa-lg"
 						aria-hidden="true"></i></span> <input type="password" required="true"
 						class="form-control" name="password1" id="password1"
-						placeholder="Entrez votre mot de passe" />
+						placeholder="Entrez votre mot de passe" value="${newUser.getPassword()}"/>
 				</div>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 					<span class="input-group-addon"><i class="fa fa-lock fa-lg"
 						aria-hidden="true"></i></span> <input type="password" required="true"
 						class="form-control" name="password2" id="password2"
-						placeholder="Confirmez votre mot de passe" />
+						placeholder="Confirmez votre mot de passe" value="${newUser.getPassword()}"/>
 				</div>
 				<span class="error text-danger">${errors['password1']}</span>
 				<!--<span class="help-block" style="color: #FF0000;">${errors['pwd1']}</span>-->
@@ -51,7 +51,7 @@
 					<span class="input-group-addon"><i class="fa fa-users fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="nom" id="nom" placeholder="Entrez le nom d'utilisateur"
-						value="${newUser.nom}" />
+						value="${newUser.getNom()}" />
 				</div>
 			</div>
 		</div>
@@ -83,7 +83,7 @@
 					<span class="input-group-addon"><i class="fa fa-users fa"
 						aria-hidden="true"></i></span> <input type="text" class="form-control"
 						name="longitude" id="longitude" placeholder="Saisissez votre longitude"
-						value="${newTrajet.longDepart}" />
+						value="${newTrajet.longDepart}" /> <!-- newTrajet.longDepart -->
 				</div>
 			</div>
 		</div>

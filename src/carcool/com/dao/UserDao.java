@@ -116,7 +116,7 @@ public class UserDao {
 		while (iterator.hasNext()) {
 			Utilisateur element = iterator.next();
 			if (element.getCategorie().equals(Categorie.C)) {
-				ret.append(element.getFirstTrajet()getDepuisAdresse());
+				ret.append(element.getFirstTrajet().getDepuisAdresse());
 				ret.append("," + element.getFirstTrajet().getLatDepart());
 				ret.append("," + element.getFirstTrajet().getLongDepart());
 				ret.append("," + element.getNom() + ";");

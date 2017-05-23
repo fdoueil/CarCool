@@ -32,8 +32,6 @@ public class RegisterUser extends HttpServlet {
 	private static final String PARAM_NAME_ADDRESS = "adresse";
 	private static final String PARAM_NAME_LONG = "longitude";
 	private static final String PARAM_NAME_LAT = "latitude";
-	
-	
 	private static final String PARAM_CATEGORIE_USAGER = "categorie";
 	
 	private static final long serialVersionUID = 1L;
@@ -161,10 +159,12 @@ public class RegisterUser extends HttpServlet {
 			user.setTrajets(trajetsUtilisateur);
 			
 			//Enregistrement de la catégorie de l'utilisateur (Conducteur par défaut, ou passager ou les deux)
-			if (categorie == "Passager"){
+			if ("passager".equals(categorie.trim().toLowerCase())){
+				LOGGER.info("Mise de la catégorie à Passager");
 				user.setCategorie(Categorie.P);
 			}
-			if (categorie == "Conducteur ou Passager"){
+			if ("Conducteur ou Passager".equals(categorie)){
+				LOGGER.info("Mise de la catégorie à Conducteur ou Passager");
 				user.setCategorie(Categorie.BOTH);
 			}
 			LOGGER.info("######################################");

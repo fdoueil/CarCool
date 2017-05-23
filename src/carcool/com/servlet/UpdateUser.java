@@ -52,7 +52,7 @@ public class UpdateUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		newUser=(Utilisateur)request.getSession().getAttribute("authUser");
-		request.setAttribute("newUser", newUser);
+		request.setAttribute("newUser", newUser); //newUser est sur la sessionScope request
 		newTrajet=((Trajet)newUser.getTrajets().toArray()[0]);
 		request.setAttribute("newTrajet", newTrajet);
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
@@ -109,13 +109,13 @@ public class UpdateUser extends HttpServlet {
 		}
 		
 		if (categorie != newUser.getCategorie().toString()){
-			if (categorie == "Conducteur"){
+			if ("Conducteur".equals(categorie)){
 				newUser.setCategorie(Categorie.C);
 			}
-			if (categorie == "Passager"){
+			if ("Passager".equals(categorie)){
 				newUser.setCategorie(Categorie.P);
 			}
-			if (categorie == "Conducteur ou Passager"){
+			if ("Conducteur ou Passager".equals(categorie)){
 				newUser.setCategorie(Categorie.BOTH);
 			}
 		}

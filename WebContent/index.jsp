@@ -73,17 +73,17 @@
         
         <script type="text/javascript">
             
-            var locationsDrivers = [
+            /*var locationsDrivers = [
               ['Cugnaux', 43.537373, 1.344962, 'François Hollande'],
               ['Balma', 43.606163, 1.500060, 'Jérome Cahuzac'],
               ['Roques', 43.506803, 1.351713, 'Manuel Vals']
-            ];
-            //var locationsDrivers = [[,],[,]];
-            //var locationsDrivers;
-            var locationsRiders = [
+            ];*/
+            /*var locationsRiders = [
               ['Quint-Fonsegrives', 43.585884, 1.544735, 'Christine Lagarde'],
               ['Escalquens', 43.518855, 1.553071, 'Lolo Aibo']
-            ];
+            ];*/
+            var locationsDrivers;
+            var locationsRiders;
             
             var map;
             var geocoder;
@@ -102,21 +102,25 @@
                       icon: 'assets/img/logo_bergerlevrault.png',
                       title: 'Berger-Levrault'
                  });
-                
-                //codeAddress();
-				//alert(JSON.stringify(locationsRiders));
 				
-				/*$.ajax({
+				$.ajax({
         			url : 'fetchdrivers',
         			data : {},
         			success : function(responseText) {
-        				//$('#ajaxGetUserServletResponse').text(responseText);
         				locationsDrivers=JSON.parse(responseText);
         				plotDriversMarkers();
         			}
-        		});*/
-        		plotDriversMarkers();
-                plotRidersMarkers();
+        		});
+        		
+				$.ajax({
+        			url : 'fetchriders',
+        			data : {},
+        			success : function(responseText) {
+        				locationsRiders=JSON.parse(responseText);
+        				plotRidersMarkers();
+        			}
+        		});
+				
                 geocoder = new google.maps.Geocoder();
             }
             

@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import carcool.com.dao.MaDao;
+
 /**
  * Servlet implementation class FetchRiders
  */
-@WebServlet("/FetchRiders")
+@WebServlet("/fetchriders")
 public class FetchRiders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,8 +28,14 @@ public class FetchRiders extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.setContentType("application/json");
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("utf-8");
+
+		//JsonObject jsonObject = new JsonObject();
+		//JsonArray jsonAuthorsArray = jsonObject.get(MaDao.getUserDao().getTableauJSConducteurs()).getAsJsonArray();
+
+		response.getWriter().write(MaDao.getUserDao().getTableauJSPassagers());
 	}
 
 	/**

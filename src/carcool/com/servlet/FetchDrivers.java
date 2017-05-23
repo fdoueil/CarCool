@@ -38,7 +38,7 @@ public class FetchDrivers extends HttpServlet {
 		//JsonObject jsonObject = new JsonObject();
 		//JsonArray jsonAuthorsArray = jsonObject.get(MaDao.getUserDao().getTableauJSConducteurs()).getAsJsonArray();
 
-		response.getWriter().write(MaDao.getUserDao().getTableauJSONConducteurs());
+		response.getWriter().write(MaDao.getUserDao().getTableauJSConducteurs());
 	}
 
 	/**

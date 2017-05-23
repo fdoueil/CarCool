@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import carcool.com.dao.MaDao;
+import carcool.com.enums.Categorie;
 import carcool.com.model.Trajet;
 import carcool.com.model.Utilisateur;
 
@@ -33,7 +34,7 @@ public class RegisterUser extends HttpServlet {
 	private static final String PARAM_NAME_LAT = "latitude";
 	
 	
-	private static final String PARAM_TYPE_USAGER = "typeusager";
+	private static final String PARAM_CATEGORIE_USAGER = "categorie";
 	
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL = "/WEB-INF/register.jsp";
@@ -105,12 +106,12 @@ public class RegisterUser extends HttpServlet {
 		String adresse = request.getParameter(PARAM_NAME_ADDRESS); 
 		String latitude = request.getParameter(PARAM_NAME_LONG);
 		String longitude = request.getParameter(PARAM_NAME_LAT);
-		String typeusager = request.getParameter(PARAM_TYPE_USAGER);
+		String categorie = request.getParameter(PARAM_CATEGORIE_USAGER);
 		
 		LOGGER.info("L'utilisateur a saisi l'email: " + email);
 		LOGGER.info("L'utilisateur a saisi le mot de passe: " + pwd1);
 		LOGGER.info("L'utilisateur a saisi le nom d'utilisateur: " + nom);
-		LOGGER.info("L'utilisateur a sélectionné comme type d'usager: " + typeusager);
+		LOGGER.info("L'utilisateur a sélectionné comme type d'usager: " + categorie);
 		LOGGER.info("L'utilisateur a sélectionné comme adresse: " + adresse);
 		LOGGER.info("L'utilisateur a sélectionné comme latitude: " + latitude);
 		LOGGER.info("L'utilisateur a sélectionné comme longitude: " + longitude);
@@ -159,6 +160,15 @@ public class RegisterUser extends HttpServlet {
 			trajetsUtilisateur.add(newTrajet);
 			user.setTrajets(trajetsUtilisateur);
 			
+			//Enregistrement de la catégorie de l'utilisateur (Conducteur par défaut, ou passager ou les deux)
+			if (categorie == "Passager"){
+				user.setCategorie(Categorie.P);
+			}
+			if (categorie == "Conducteur ou Passager"){
+				user.setCategorie(Categorie.BOTH);
+			}
+			LOGGER.info("######################################");
+			LOGGER.info("Catégorie enregistrée: "+ user.getCategorie().toString());
 			LOGGER.info("Utilisateur " + newUser.getNom() + " ajouté à la liste DAO des utilisateurs");
 		}
 		

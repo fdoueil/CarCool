@@ -3,6 +3,7 @@ package carcool.com.servlet;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import carcool.com.dao.MaDao;
+import carcool.com.enums.Categorie;
 import carcool.com.model.Trajet;
 import carcool.com.model.Utilisateur;
 
@@ -31,9 +33,7 @@ public class RegisterUser extends HttpServlet {
 	private static final String PARAM_NAME_ADDRESS = "adresse";
 	private static final String PARAM_NAME_LONG = "longitude";
 	private static final String PARAM_NAME_LAT = "latitude";
-	
-	
-	private static final String PARAM_TYPE_USAGER = "typeusager";
+	private static final String PARAM_CATEGORIE_USAGER = "categorie";
 	
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL = "/WEB-INF/register.jsp";
@@ -103,14 +103,14 @@ public class RegisterUser extends HttpServlet {
 		String pwd2 = request.getParameter(PARAM_NAME_PWD2);
 		String nom = request.getParameter(PARAM_NAME_NAME);
 		String adresse = request.getParameter(PARAM_NAME_ADDRESS); 
-		String latitude = request.getParameter(PARAM_NAME_LONG);
-		String longitude = request.getParameter(PARAM_NAME_LAT);
-		String typeusager = request.getParameter(PARAM_TYPE_USAGER);
+		String longitude = request.getParameter(PARAM_NAME_LONG);
+		String latitude= request.getParameter(PARAM_NAME_LAT);
+		String categorie = request.getParameter(PARAM_CATEGORIE_USAGER);
 		
 		LOGGER.info("L'utilisateur a saisi l'email: " + email);
 		LOGGER.info("L'utilisateur a saisi le mot de passe: " + pwd1);
 		LOGGER.info("L'utilisateur a saisi le nom d'utilisateur: " + nom);
-		LOGGER.info("L'utilisateur a sélectionné comme type d'usager: " + typeusager);
+		LOGGER.info("L'utilisateur a sélectionné comme type d'usager: " + categorie);
 		LOGGER.info("L'utilisateur a sélectionné comme adresse: " + adresse);
 		LOGGER.info("L'utilisateur a sélectionné comme latitude: " + latitude);
 		LOGGER.info("L'utilisateur a sélectionné comme longitude: " + longitude);
@@ -146,6 +146,31 @@ public class RegisterUser extends HttpServlet {
 		
 		Trajet newTrajet = null;
 		
+		
+		//Récupération de la liste des utilisateurs
+		HashSet<Utilisateur> utilisateursEnregistres = MaDao.getUserDao().getUtilisateurs();
+		LOGGER.info("Fin récupération liste utilisateurs.");
+		//Si j'ai une liste d'utilisateurs
+	
+		LOGGER.info("Début recherche utilisateur.");
+		if (!utilisateursEnregistres.isEmpty()){
+			//Recherche d'un utilisateur correspondant aux informations récupérées dans le formulaire		
+			//Utilisateur utilisateur = null;
+			Iterator user_iterator = utilisateursEnregistres.iterator();
+			
+			LOGGER.info("Début boucle for");
+			for (Utilisateur utilisateur : utilisateursEnregistres) {
+				LOGGER.info("Boucle for: Traitement sur l'utilisateur " + utilisateur.getNom()
+				+". Email: " + utilisateur.getEmail() 
+				+ ". Mot de passe: " + utilisateur.getPassword() + ".");
+				if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(pwd1)){
+					actionResult="0";
+					session.setAttribute("authUser", utilisateur);
+					break;
+				}
+			}
+		}
+		
 		// OK donc on ajoute l'utilisateur à la liste
 		if (actionResult.equals("1")) {
 			//Ajout de l'utilisateur à la DAO
@@ -159,23 +184,35 @@ public class RegisterUser extends HttpServlet {
 			trajetsUtilisateur.add(newTrajet);
 			user.setTrajets(trajetsUtilisateur);
 			
+			//Enregistrement de la catégorie de l'utilisateur (Conducteur par défaut, ou passager ou les deux)
+			if ("Passager".equals(categorie)){
+				LOGGER.info("Mise de la catégorie à Passager");
+				user.setCategorie(Categorie.P);
+			}
+			if ("Conducteur ou Passager".equals(categorie)){
+				LOGGER.info("Mise de la catégorie à Conducteur ou Passager");
+				user.setCategorie(Categorie.BOTH);
+			}
+			LOGGER.info("######################################");
+			LOGGER.info("Catégorie enregistrée: "+ user.getCategorie().toString());
 			LOGGER.info("Utilisateur " + newUser.getNom() + " ajouté à la liste DAO des utilisateurs");
+		
+		
+			session.setAttribute("users", users);
+			
+			
+			// Champs déjà saisi mail + name (on doit pas les perdre)
+			request.setAttribute("newUser", newUser);
+			newTrajet.setLatDepart(Double.parseDouble(latitude));
+			newTrajet.setLongDepart(Double.parseDouble(longitude));
+			
+			request.setAttribute("newTrajet", newTrajet);
+			
+			request.setAttribute("errors", errors);
+			request.setAttribute("actionMessage", actionMessage);
+			request.setAttribute("actionResult", actionResult);
 		}
 		
-		session.setAttribute("users", users);
-		
-		
-		// Champs déjà saisi mail + name (on doit pas les perdre)
-		request.setAttribute("newUser", newUser);
-		newTrajet.setLatDepart(Double.parseDouble(latitude));
-		newTrajet.setLongDepart(Double.parseDouble(longitude));
-		
-		request.setAttribute("newTrajet", newTrajet);
-		
-		request.setAttribute("errors", errors);
-		request.setAttribute("actionMessage", actionMessage);
-		request.setAttribute("actionResult", actionResult);
-
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
 	

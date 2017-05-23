@@ -68,22 +68,26 @@
         
         <c:import url="/WEB-INF/footer/footer.html"/>
         
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCW_E-FQsQOcbgaiNYj7PSZ_JTzICvZQ&callback=initMap"
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCW_E-FQsQOcbgaiNYj7PSZ_JTzICvZQ"
         async defer></script>
         
         <script type="text/javascript">
             
-            var locationsDrivers = [
+            /*var locationsDrivers = [
               ['Cugnaux', 43.537373, 1.344962, 'François Hollande'],
               ['Balma', 43.606163, 1.500060, 'Jérome Cahuzac'],
               ['Roques', 43.506803, 1.351713, 'Manuel Vals']
-            ];
-            var locationsRiders = [
+            ];*/
+            /*var locationsRiders = [
               ['Quint-Fonsegrives', 43.585884, 1.544735, 'Christine Lagarde'],
               ['Escalquens', 43.518855, 1.553071, 'Lolo Aibo']
-            ];
+            ];*/
+            var locationsDrivers;
+            var locationsRiders;
+            
             var map;
             var geocoder;
+            
             function initialize() {
                 var blLatLng = {lat: 43.541252, lng: 1.511911};
                 var mapOptions = {
@@ -98,13 +102,28 @@
                       icon: 'assets/img/logo_bergerlevrault.png',
                       title: 'Berger-Levrault'
                  });
-                
-                //codeAddress();
-                plotDriversMarkers();
-                plotRidersMarkers();
+				
+				$.ajax({
+        			url : 'fetchdrivers',
+        			data : {},
+        			success : function(responseText) {
+        				locationsDrivers=JSON.parse(responseText);
+        				plotDriversMarkers();
+        			}
+        		});
+        		
+				$.ajax({
+        			url : 'fetchriders',
+        			data : {},
+        			success : function(responseText) {
+        				locationsRiders=JSON.parse(responseText);
+        				plotRidersMarkers();
+        			}
+        		});
+				
                 geocoder = new google.maps.Geocoder();
             }
-    
+            
             function plotDriversMarkers() {
                 var i;
                 for (i = 0; i < locationsDrivers.length; i++) {  
@@ -147,27 +166,27 @@
 	         	 var address = document.getElementById('address').value;
 	         	 var rayonEnMetres = (document.getElementById('rayon').value)*1000;
 	        	 geocoder.geocode({'address': address}, function(results, status) {
-	             if (status === 'OK') {
-	             resultsMap.setCenter(results[0].geometry.location);
-	             var marker = new google.maps.Marker({
-	             map: resultsMap,
-	             position: results[0].geometry.location
-	             });
-	             var cityCircle = new google.maps.Circle({
-	            	 //strokeColor: '#FF0000',
-	                 //strokeOpacity: 0.8,
-	                 //strokeWeight: 2,
-	                 //fillColor: '#FF0000',
-	                 //fillOpacity: 0.35,
-	            	 map: resultsMap,
-	                 center: results[0].geometry.location,
-	                 radius: rayonEnMetres
-	               });
-	        } else {
-	             alert('Google Map ne peut pas géolocaliser cette adresse: ' + status);
-	              }
-	            });
-          }
+		             if (status === 'OK') {
+			             resultsMap.setCenter(results[0].geometry.location);
+			             var marker = new google.maps.Marker({
+			             	map: resultsMap,
+			             	position: results[0].geometry.location
+		             		});
+		             	 var cityCircle = new google.maps.Circle({
+		            	 //strokeColor: '#FF0000',
+		                 //strokeOpacity: 0.8,
+		                 //strokeWeight: 2,
+		                 //fillColor: '#FF0000',
+		                 //fillOpacity: 0.35,
+		            	 map: resultsMap,
+		                 center: results[0].geometry.location,
+		                 radius: rayonEnMetres
+		             		});
+		        	 } else {
+		             	alert('Google Map ne peut pas géolocaliser cette adresse: ' + status);
+	                 }
+	           	});
+          	}
     
       </script>
 

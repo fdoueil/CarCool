@@ -82,16 +82,16 @@ public class UserDao {
 		while (iterator.hasNext()) {
 			Utilisateur element = iterator.next();
 			if (element.getCategorie().equals(Categorie.C)) {
-				ret.append("['" + ((Trajet)element.getTrajets().toArray()[0]).getDepuisAdresse());
-				ret.append("', " + ((Trajet)element.getTrajets().toArray()[0]).getLatDepart());
-				ret.append(", " + ((Trajet)element.getTrajets().toArray()[0]).getLongDepart());
-				ret.append(", '" + element.getNom() + "'],");
+				ret.append("[\"" + element.getFirstTrajet().getDepuisAdresse());
+				ret.append("\"," + element.getFirstTrajet().getLatDepart());
+				ret.append("," + element.getFirstTrajet().getLongDepart());
+				ret.append(",\"" + element.getNom() + "\"],");
 			}
 		}
 		
 		return (ret.substring(0, ret.length()-1) + "]");
 	}
-	
+		
 	// Permet de retourner dans le Javascript un tableau construit dynamiquement
 	/*[['Quint-Fonsegrives', 43.585884, 1.544735, 'Christine Lagarde'],
       ['Escalquens', 43.518855, 1.553071, 'Lolo Aibo']]*/
@@ -104,10 +104,10 @@ public class UserDao {
 		while (iterator.hasNext()) {
 			Utilisateur element = iterator.next();
 			if (element.getCategorie().equals(Categorie.P)) {
-				ret.append("['" + ((Trajet)element.getTrajets().toArray()[0]).getDepuisAdresse());
-				ret.append("', " + ((Trajet)element.getTrajets().toArray()[0]).getLatDepart());
-				ret.append(", " + ((Trajet)element.getTrajets().toArray()[0]).getLongDepart());
-				ret.append(", '" + element.getNom() + "'],");
+				ret.append("[\"" + element.getFirstTrajet().getDepuisAdresse());
+				ret.append("\", " + element.getFirstTrajet().getLatDepart());
+				ret.append("," + element.getFirstTrajet().getLongDepart());
+				ret.append(",\"" + element.getNom() + "\"],");
 			}
 		}
 		

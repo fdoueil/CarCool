@@ -93,16 +93,9 @@
 				d'usager</label>
 			<div class="cols-sm-10">
 				<div class="radio">
-						<label><input type="radio"
-						class=".radio-inline" name="typeusager" id="typeusager" value="Conducteur" checked
-						> Conducteur </label>
-						<label><input type="radio"
-						class=".radio-inline" name="typeusager" id="typeusager" value="Passager"
-						> Passager </label>
-						<label><input type="radio"
-						class=".radio-inline" name="typeusager" id="typeusager" value="LesDeux"
-						> Les deux </label>
-						
+						<label><input type="radio" class=".radio-inline" name="categorie" id="categorie" value="Conducteur" ${requestScope['newUser'].getCategorie().toString() == 'Conducteur'? 'checked':''}> Conducteur </label> <!--  -->
+						<label><input type="radio" class=".radio-inline" name="categorie" id="categorie" value="Passager" ${requestScope['newUser'].getCategorie().toString() == 'Passager'? 'checked':''}> Passager </label> <!--  -->
+						<label><input type="radio" class=".radio-inline" name="categorie" id="categorie" value="Conducteur ou Passager" ${requestScope['newUser'].getCategorie().toString() == 'Conducteur ou Passager'? 'checked':''}> Conducteur ou Passager </label>	
 				</div>
 			</div>
 		</div>

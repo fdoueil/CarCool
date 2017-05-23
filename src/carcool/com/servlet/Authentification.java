@@ -115,15 +115,15 @@ public class Authentification extends HttpServlet {
 			}
 			// L'utilisateur n'a pas été trouvé
 			else {
-				//On retourne à l'authtentification avec un message d'erreur
+				//On retourne à l'authentification avec un message d'erreur
 				RequestDispatcher rd=request.getRequestDispatcher("authentification_error.jsp");  
 	            rd.forward(request, response);  
 	            LOGGER.info("Utilisateur non trouvé");
 			}
 		}
 		else {
-			//On retourne à l'authtentification avec un message d'erreur
-			RequestDispatcher rd=request.getRequestDispatcher("authentification.jsp");  
+			//La liste des utilisateurs est vide. On retourne à l'authentification avec un message d'erreur
+			RequestDispatcher rd=request.getRequestDispatcher("authentification_error.jsp");  
             rd.include(request, response);
             LOGGER.info("Utilisateur non trouvé");
 		}

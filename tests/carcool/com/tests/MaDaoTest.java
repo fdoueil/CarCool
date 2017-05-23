@@ -198,7 +198,7 @@ public class MaDaoTest {
 		c.setTrajets(trajetsC);
 		
 		System.out.println(MaDao.getUserDao().getTableauJSConducteurs());
-		assertEquals("[['Balma', 43.606163, 1.50006, 'Jérome Cahuzac'],['Roques', 43.506803, 1.351713, 'Manuel Vals'],['Cugnaux', 43.537373, 1.344962, 'François Hollande']]",
+		assertEquals("[[\"Cugnaux\",43.537373,1.344962,\"François Hollande\"],[\"Balma\",43.606163,1.50006,\"Jérome Cahuzac\"],[\"Roques\",43.506803,1.351713,\"Manuel Vals\"]]",
 				MaDao.getUserDao().getTableauJSConducteurs());
 		
 		//System.out.println(MaDao.getUserDao().getTableauJSONConducteurs());
@@ -235,7 +235,7 @@ public class MaDaoTest {
 		b.setTrajets(trajetsB);
 		
 		System.out.println(MaDao.getUserDao().getTableauJSPassagers());
-		assertEquals("[['Escalquens', 43.518855, 1.553071, 'Lolo Aibo'],['Quint-Fonsegrives', 43.585884, 1.544735, 'Christine Lagarde']]", 
+		assertEquals("[[\"Escalquens\",43.518855,1.553071,\"Lolo Aibo\"],[\"Quint-Fonsegrives\",43.585884,1.544735,\"Christine Lagarde\"]]", 
 				MaDao.getUserDao().getTableauJSPassagers());
 	}
 }

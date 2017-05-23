@@ -102,14 +102,14 @@
                       icon: 'assets/img/logo_bergerlevrault.png',
                       title: 'Berger-Levrault'
                  });
-				
+                
 				$.ajax({
         			url : 'fetchdrivers',
         			data : {},
         			success : function(responseText) {
         				locationsDrivers=JSON.parse(responseText);
         				plotDriversMarkers();
-        			}
+        		        }
         		});
         		
 				$.ajax({
@@ -118,7 +118,7 @@
         			success : function(responseText) {
         				locationsRiders=JSON.parse(responseText);
         				plotRidersMarkers();
-        			}
+        		        }
         		});
 				
                 geocoder = new google.maps.Geocoder();

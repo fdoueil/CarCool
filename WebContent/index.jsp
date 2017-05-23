@@ -42,14 +42,12 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-8">
-                                    <div id="map" style="width: 720px; height: 720px;"></div>
-	                                    <div id="floating-panel">
-								        Votre adresse: 
-								        <input id="address" type="textbox" value="">
-								        Rayon de recherche:
-								        <input id="rayon" type="textbox" value="">
-								        <input id="submit" type="button" value="Localiser" onClick="geocodeAddress();">
-							        </div>
+                                	Votre adresse : 
+							        <input id="address" type="textbox" value="">
+							        Rayon de recherche (kms) :
+							        <input id="rayon" type="textbox" value="">
+							        <input id="submit" type="button" value="Localiser" onClick="geocodeAddress();">
+                                   <div id="map" style="width: 720px; height: 720px;"></div>
                                 </div>
                                 <div class="col-md-2">
                                     <p><img src="assets/img/conducteur.png" alt="Conducteurs" height="16" width="16">   Conducteurs</p>

@@ -3,6 +3,7 @@ package carcool.com.servlet;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -102,8 +103,8 @@ public class RegisterUser extends HttpServlet {
 		String pwd2 = request.getParameter(PARAM_NAME_PWD2);
 		String nom = request.getParameter(PARAM_NAME_NAME);
 		String adresse = request.getParameter(PARAM_NAME_ADDRESS); 
-		String latitude = request.getParameter(PARAM_NAME_LONG);
-		String longitude = request.getParameter(PARAM_NAME_LAT);
+		String longitude = request.getParameter(PARAM_NAME_LONG);
+		String latitude= request.getParameter(PARAM_NAME_LAT);
 		String categorie = request.getParameter(PARAM_CATEGORIE_USAGER);
 		
 		LOGGER.info("L'utilisateur a saisi l'email: " + email);
@@ -145,6 +146,31 @@ public class RegisterUser extends HttpServlet {
 		
 		Trajet newTrajet = null;
 		
+		
+		//Récupération de la liste des utilisateurs
+		HashSet<Utilisateur> utilisateursEnregistres = MaDao.getUserDao().getUtilisateurs();
+		LOGGER.info("Fin récupération liste utilisateurs.");
+		//Si j'ai une liste d'utilisateurs
+	
+		LOGGER.info("Début recherche utilisateur.");
+		if (!utilisateursEnregistres.isEmpty()){
+			//Recherche d'un utilisateur correspondant aux informations récupérées dans le formulaire		
+			//Utilisateur utilisateur = null;
+			Iterator user_iterator = utilisateursEnregistres.iterator();
+			
+			LOGGER.info("Début boucle for");
+			for (Utilisateur utilisateur : utilisateursEnregistres) {
+				LOGGER.info("Boucle for: Traitement sur l'utilisateur " + utilisateur.getNom()
+				+". Email: " + utilisateur.getEmail() 
+				+ ". Mot de passe: " + utilisateur.getPassword() + ".");
+				if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(pwd1)){
+					actionResult="0";
+					session.setAttribute("authUser", utilisateur);
+					break;
+				}
+			}
+		}
+		
 		// OK donc on ajoute l'utilisateur à la liste
 		if (actionResult.equals("1")) {
 			//Ajout de l'utilisateur à la DAO
@@ -159,7 +185,7 @@ public class RegisterUser extends HttpServlet {
 			user.setTrajets(trajetsUtilisateur);
 			
 			//Enregistrement de la catégorie de l'utilisateur (Conducteur par défaut, ou passager ou les deux)
-			if ("passager".equals(categorie.trim().toLowerCase())){
+			if ("Passager".equals(categorie)){
 				LOGGER.info("Mise de la catégorie à Passager");
 				user.setCategorie(Categorie.P);
 			}
@@ -170,22 +196,23 @@ public class RegisterUser extends HttpServlet {
 			LOGGER.info("######################################");
 			LOGGER.info("Catégorie enregistrée: "+ user.getCategorie().toString());
 			LOGGER.info("Utilisateur " + newUser.getNom() + " ajouté à la liste DAO des utilisateurs");
+		
+		
+			session.setAttribute("users", users);
+			
+			
+			// Champs déjà saisi mail + name (on doit pas les perdre)
+			request.setAttribute("newUser", newUser);
+			newTrajet.setLatDepart(Double.parseDouble(latitude));
+			newTrajet.setLongDepart(Double.parseDouble(longitude));
+			
+			request.setAttribute("newTrajet", newTrajet);
+			
+			request.setAttribute("errors", errors);
+			request.setAttribute("actionMessage", actionMessage);
+			request.setAttribute("actionResult", actionResult);
 		}
 		
-		session.setAttribute("users", users);
-		
-		
-		// Champs déjà saisi mail + name (on doit pas les perdre)
-		request.setAttribute("newUser", newUser);
-		newTrajet.setLatDepart(Double.parseDouble(latitude));
-		newTrajet.setLongDepart(Double.parseDouble(longitude));
-		
-		request.setAttribute("newTrajet", newTrajet);
-		
-		request.setAttribute("errors", errors);
-		request.setAttribute("actionMessage", actionMessage);
-		request.setAttribute("actionResult", actionResult);
-
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
 	

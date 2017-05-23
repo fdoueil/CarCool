@@ -76,20 +76,54 @@ public class UserDao {
 	public String getTableauJSConducteurs() {
 		StringBuilder ret= new StringBuilder();
 		
-		ret.append("[");
+		ret.append("\"[");
 		
 		Iterator<Utilisateur> iterator = utilisateurs.iterator();
 		while (iterator.hasNext()) {
 			Utilisateur element = iterator.next();
 			if (element.getCategorie().equals(Categorie.C)) {
-				ret.append("['" + ((Trajet)element.getTrajets().toArray()[0]).getDepuisAdresse());
-				ret.append("', " + ((Trajet)element.getTrajets().toArray()[0]).getLatDepart());
-				ret.append(", " + ((Trajet)element.getTrajets().toArray()[0]).getLongDepart());
-				ret.append(", '" + element.getNom() + "'],");
+				ret.append("[\"" + element.getFirstTrajet().getDepuisAdresse());
+				ret.append("\"," + element.getFirstTrajet().getLatDepart());
+				ret.append("," + element.getFirstTrajet().getLongDepart());
+				ret.append(",\"" + element.getNom() + "\"],");
 			}
 		}
 		
-		return (ret.substring(0, ret.length()-1) + "]");
+		return (ret.substring(0, ret.length()-1) + "]\"");
+	}
+	
+	public String getTableauJSONConducteurs() {
+		StringBuilder ret= new StringBuilder();
+		
+		Iterator<Utilisateur> iterator = utilisateurs.iterator();
+		while (iterator.hasNext()) {
+			Utilisateur element = iterator.next();
+			if (element.getCategorie().equals(Categorie.C)) {
+				ret.append("{\"" + element.getFirstTrajet().getDepuisAdresse());
+				ret.append("\"," + element.getFirstTrajet().getLatDepart());
+				ret.append("," + element.getFirstTrajet().getLongDepart());
+				ret.append(",\"" + element.getNom() + "\"},");
+			}
+		}
+		
+		return ("{" + ret.substring(0, ret.length()-1) + "}");
+	}
+	
+	public String getTableauSimpleJSONConducteurs() {
+		StringBuilder ret= new StringBuilder();
+		
+		Iterator<Utilisateur> iterator = utilisateurs.iterator();
+		while (iterator.hasNext()) {
+			Utilisateur element = iterator.next();
+			if (element.getCategorie().equals(Categorie.C)) {
+				ret.append(element.getFirstTrajet()getDepuisAdresse());
+				ret.append("," + element.getFirstTrajet().getLatDepart());
+				ret.append("," + element.getFirstTrajet().getLongDepart());
+				ret.append("," + element.getNom() + ";");
+			}
+		}
+		
+		return ("\"" + ret.substring(0, ret.length()-1) + "\"");
 	}
 	
 	// Permet de retourner dans le Javascript un tableau construit dynamiquement
@@ -104,9 +138,9 @@ public class UserDao {
 		while (iterator.hasNext()) {
 			Utilisateur element = iterator.next();
 			if (element.getCategorie().equals(Categorie.P)) {
-				ret.append("['" + ((Trajet)element.getTrajets().toArray()[0]).getDepuisAdresse());
-				ret.append("', " + ((Trajet)element.getTrajets().toArray()[0]).getLatDepart());
-				ret.append(", " + ((Trajet)element.getTrajets().toArray()[0]).getLongDepart());
+				ret.append("['" + element.getFirstTrajet().getDepuisAdresse());
+				ret.append("', " + element.getFirstTrajet().getLatDepart());
+				ret.append(", " + element.getFirstTrajet().getLongDepart());
 				ret.append(", '" + element.getNom() + "'],");
 			}
 		}

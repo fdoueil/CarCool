@@ -18,6 +18,15 @@ public class Utilisateur implements IUserRegisterValidator{
 	
 	private HashSet<Trajet> trajets;
 	
+	public Trajet getFirstTrajet() {
+		Trajet ret = null;
+		
+		if (trajets.size()>0) {
+			ret= (Trajet) trajets.toArray()[0];
+		}
+		return ret;
+	}
+	
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}

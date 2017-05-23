@@ -83,15 +83,17 @@
       var arrivee = " 64 Rue Jean Rostand, 31670 Labège"; // adresse en dur (BL)
 
       // tableaux bouchonés pour les markers des conducteurs et des passagers
-      var locationsDrivers = [
+     /*var locationsDrivers = [
               ['Cugnaux', 43.537373, 1.344962, 'François Hollande'],
               ['Balma', 43.606163, 1.500060, 'Jérome Cahuzac'],
               ['Roques', 43.506803, 1.351713, 'Manuel Vals']
-            ];
-      var locationsRiders = [
+            ];*/
+     /*var locationsRiders = [
               ['Quint-Fonsegrives', 43.585884, 1.544735, 'Christine Lagarde'],
               ['Escalquens', 43.518855, 1.553071, 'Lolo Aibo']
-            ];
+            ];*/
+      var locationsDrivers;
+      var locationsRiders;
       var map;
 
       function initialize() {
@@ -104,6 +106,24 @@
           center: blLatLng
         });
         directionsDisplay.setMap(map);
+        
+        $.ajax({
+            url : 'fetchdrivers',
+            data : {},
+            success : function(responseText) {
+                locationsDrivers=JSON.parse(responseText);
+                plotDriversMarkers();
+            }
+        });
+        
+        $.ajax({
+            url : 'fetchriders',
+            data : {},
+            success : function(responseText) {
+                locationsRiders=JSON.parse(responseText);
+                plotRidersMarkers();
+            }
+        });
 
         var blMarker = new google.maps.Marker({
                       position: blLatLng,

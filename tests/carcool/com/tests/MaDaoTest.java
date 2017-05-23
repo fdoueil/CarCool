@@ -201,7 +201,7 @@ public class MaDaoTest {
 		assertEquals("[['Balma', 43.606163, 1.50006, 'Jérome Cahuzac'],['Roques', 43.506803, 1.351713, 'Manuel Vals'],['Cugnaux', 43.537373, 1.344962, 'François Hollande']]",
 				MaDao.getUserDao().getTableauJSConducteurs());
 		
-		System.out.println(MaDao.getUserDao().getTableauJSONConducteurs());
+		//System.out.println(MaDao.getUserDao().getTableauJSONConducteurs());
 	}
 	
 	@Test

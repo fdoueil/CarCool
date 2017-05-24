@@ -6,13 +6,54 @@ public class Trajet {
 
 	private int idConducteur;
 	private String depuisAdresse;
+	private double latDepart;
+	private double longDepart;
 	private String versAdresse;
+	private double latArrivee;
+	private double longArrivee;
+	
+	public double getLatDepart() {
+		return latDepart;
+	}
+
+	public void setLatDepart(double latDepart) {
+		this.latDepart = latDepart;
+	}
+
+	public double getLongDepart() {
+		return longDepart;
+	}
+
+	public void setLongDepart(double longDepart) {
+		this.longDepart = longDepart;
+	}
+
+	public double getLatArrivee() {
+		return latArrivee;
+	}
+
+	public void setLatArrivee(double latArrivee) {
+		this.latArrivee = latArrivee;
+	}
+
+	public double getLongArrivee() {
+		return longArrivee;
+	}
+
+	public void setLongArrivee(double longArrivee) {
+		this.longArrivee = longArrivee;
+	}
+
 	private List<String> etapes;
 	private int sieges;
 
 	private List<String> jours;
 	private String plageHoraireAller;
 	private String plageHoraireRetour;
+
+	public String getDepuisAdresse() {
+		return depuisAdresse;
+	}
 
 	/**
 	 * Constructeur.

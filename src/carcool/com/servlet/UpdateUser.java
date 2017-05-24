@@ -33,7 +33,7 @@ public class UpdateUser extends HttpServlet {
 	private static final String PARAM_NAME_LAT = "latitude";
 	private static final String PARAM_CATEGORIE_USAGER = "categorie";
 	
-	private Utilisateur newUser=null;
+	private Utilisateur authUser=null;
 	private Trajet newTrajet=null;
 	
 	public static String VIEW_PAGES_URL = "/WEB-INF/update.jsp";
@@ -51,9 +51,10 @@ public class UpdateUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		newUser=(Utilisateur)request.getSession().getAttribute("authUser");
-		request.setAttribute("newUser", newUser); //newUser est sur la sessionScope request
-		newTrajet=((Trajet)newUser.getTrajets().toArray()[0]);
+		authUser=(Utilisateur)request.getSession().getAttribute("authUser");
+		request.setAttribute("newUser", authUser); //newUser est sur la sessionScope request
+		//On récupère l'adresse de l'utilisateur
+		newTrajet=((Trajet)authUser.getFirstTrajet());
 		request.setAttribute("newTrajet", newTrajet);
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
@@ -75,28 +76,28 @@ public class UpdateUser extends HttpServlet {
 		String categorie = request.getParameter(PARAM_CATEGORIE_USAGER);
 		
 		System.out.println("################################");
-		System.out.println("Catégorie actuelle: "+ newUser.getCategorie().toString());
+		System.out.println("Catégorie actuelle: "+ authUser.getCategorie().toString());
 
 		//Mise à jour de l'utilisateur à partir des informations récupérées sur le formulaire
-		if (email != newUser.getEmail()){
-			newUser.setEmail(email);	
+		if (email != authUser.getEmail()){
+			authUser.setEmail(email);	
 		}
-		if (pwd1 != newUser.getPassword1() && pwd1.equals(pwd2)){
-			newUser.setPassword1(pwd1);
-			newUser.setPassword2(pwd2);
+		if (pwd1 != authUser.getPassword1() && pwd1.equals(pwd2)){
+			authUser.setPassword1(pwd1);
+			authUser.setPassword2(pwd2);
 		}
 		
-		if (nom != newUser.getNom()){
-			newUser.setNom(nom);
+		if (nom != authUser.getNom()){
+			authUser.setNom(nom);
 		}
 		if (adresse != newTrajet.getDepuisAdresse()){
 			// Création d'un trajet
 			HashSet<Trajet> trajetsUtilisateur = new HashSet<Trajet>();
 			//Trajet domicile-travail
-			newTrajet= new Trajet(newUser.getIdUtilisateur(),adresse,"Labège, Rue Edmond Rostand",0,null,null,null);
+			newTrajet= new Trajet(authUser.getIdUtilisateur(),adresse,"Labège, Rue Edmond Rostand",0,null,null,null);
 			trajetsUtilisateur.add(newTrajet);
-			newUser.getTrajets().clear();
-			newUser.setTrajets(trajetsUtilisateur);
+			authUser.getTrajets().clear();
+			authUser.setTrajets(trajetsUtilisateur);
 			//newUser.getTrajets().toArray()[0]=adresse;
 		}
 		
@@ -108,15 +109,15 @@ public class UpdateUser extends HttpServlet {
 			newTrajet.setLongDepart(Double.parseDouble(longitude));
 		}
 		
-		if (categorie != newUser.getCategorie().toString()){
+		if (categorie != authUser.getCategorie().toString()){
 			if ("Conducteur".equals(categorie)){
-				newUser.setCategorie(Categorie.C);
+				authUser.setCategorie(Categorie.C);
 			}
 			if ("Passager".equals(categorie)){
-				newUser.setCategorie(Categorie.P);
+				authUser.setCategorie(Categorie.P);
 			}
 			if ("Conducteur ou Passager".equals(categorie)){
-				newUser.setCategorie(Categorie.BOTH);
+				authUser.setCategorie(Categorie.BOTH);
 			}
 		}
 		

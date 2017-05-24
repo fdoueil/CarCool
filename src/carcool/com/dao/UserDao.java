@@ -69,6 +69,20 @@ public class UserDao {
 		return ret;
 	}
 	
+	public int recupererIdUser(String email, String password) {
+		int idUser=0;
+		Iterator<Utilisateur> iterator = utilisateurs.iterator();
+		while (iterator.hasNext()) {
+			Utilisateur element = iterator.next();
+			if (element.getEmail().equals(email) && element.getPassword().equals(password)) {
+				idUser=element.getIdUtilisateur();
+				break;
+			}
+		}
+		
+		return idUser;
+	}
+	
 	// Permet de retourner dans le Javascript un tableau construit dynamiquement
 	/* [['Cugnaux', 43.537373, 1.344962, 'François Hollande'],
 	    ['Balma', 43.606163, 1.500060, 'Jérome Cahuzac'],

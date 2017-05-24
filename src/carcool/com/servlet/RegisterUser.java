@@ -152,7 +152,7 @@ public class RegisterUser extends HttpServlet {
 		LOGGER.info("Fin récupération liste utilisateurs.");
 		//Si j'ai une liste d'utilisateurs
 	
-		LOGGER.info("Début recherche utilisateur.");
+		/*LOGGER.info("Début recherche utilisateur.");
 		if (!utilisateursEnregistres.isEmpty()){
 			//Recherche d'un utilisateur correspondant aux informations récupérées dans le formulaire		
 			//Utilisateur utilisateur = null;
@@ -169,18 +169,24 @@ public class RegisterUser extends HttpServlet {
 					break;
 				}
 			}
+		}*/
+		//L'utilisateur existe déjà. On ne peut donc le recréer
+		if(MaDao.getUserDao().existUser(email, pwd1)){
+			actionResult="0";
 		}
 		
 		// OK donc on ajoute l'utilisateur à la liste
 		if (actionResult.equals("1")) {
 			//Ajout de l'utilisateur à la DAO
 			MaDao.getUserDao().getUtilisateurs().add(newUser);
-			//Ajout de trajets à l'utilisateur
+			//Ajout de trajets à l'utilisateur. 
+			//Je recherche l'utilisateur créé
 			Utilisateur user = MaDao.getUserDao().getUserById(identifiantUtilisateur);
-			// Création d'un trajet
+			// Je crée sa liste de trajets initial qui est vide
 			HashSet<Trajet> trajetsUtilisateur = new HashSet<Trajet>();
 			//Trajet domicile-travail
 			newTrajet= new Trajet(identifiantUtilisateur,adresse,"Labège, Rue Edmond Rostand",0,null,null,null);
+			//Ajout du trajet domicile-travail de l'utilisateur à la liste de ses trajets
 			trajetsUtilisateur.add(newTrajet);
 			user.setTrajets(trajetsUtilisateur);
 			
@@ -200,6 +206,7 @@ public class RegisterUser extends HttpServlet {
 		
 			session.setAttribute("users", users);
 			
+			//session.setAttribute("authUser", newUser);
 			
 			// Champs déjà saisi mail + name (on doit pas les perdre)
 			request.setAttribute("newUser", newUser);

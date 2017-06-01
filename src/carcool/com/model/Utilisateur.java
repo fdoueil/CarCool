@@ -98,6 +98,18 @@ public class Utilisateur implements IUserRegisterValidator{
 		this.trajets = trajets;
 	}
 
+/*	@Override
+	public String validateEmail() {
+		String ret = VALIDATE_OK;
+		if (this.email != null && this.email.trim().length() != 0) {
+			if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+				return "Veuillez saisir une adresse mail valide !";
+			}
+		} else {
+			return "L'adresse mail est obligatoire !";
+		}
+		return ret;
+	}*/
 	@Override
 	public String validateEmail() {
 		String ret = VALIDATE_OK;
@@ -119,7 +131,7 @@ public class Utilisateur implements IUserRegisterValidator{
 		}*/
 
 		/*if (!this.password1.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}")) {
-			return "Le mot de passe doit : contenir au moins 1 chiffre, une lettre minuscule, une lettre majuscule, avoir une longueur d'au moins 8 caract�res, pas d'espaces et un caract�re sp�cial parmi @#$%^&+=";
+			return "Le mot de passe doit : contenir au moins 1 chiffre, une lettre minuscule, une lettre majuscule, avoir une longueur d'au moins 8 caractères, pas d'espaces et un caractère spécial parmi @#$%^&+=";
 		}*/
 		return ret;
 		// Password is complex ?

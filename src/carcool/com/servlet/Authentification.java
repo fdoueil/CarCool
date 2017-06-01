@@ -73,39 +73,19 @@ public class Authentification extends HttpServlet {
 		LOGGER.info("Début recherche utilisateur.");
 		if (!utilisateursEnregistres.isEmpty()){
 
-			//Recherche d'un utilisateur correspondant aux informations récupérées dans le formulaire		
-			//Utilisateur utilisateur = null;
-			Iterator user_iterator = utilisateursEnregistres.iterator();
-			boolean utilisateurTrouve=false;
-			
-			LOGGER.info("Début boucle for");
-			for (Utilisateur utilisateur : utilisateursEnregistres) {
-				LOGGER.info("Boucle for: Traitement sur l'utilisateur " + utilisateur.getNom()
-				+". Email: " + utilisateur.getEmail() 
-				+ ". Mot de passe: " + utilisateur.getPassword() + ".");
-				if(utilisateur.getEmail().equals(email) && utilisateur.getPassword().equals(password)){
-					utilisateurTrouve=true;
-					session.setAttribute("authUser", utilisateur);
-					break;
-				}
-			}
-			LOGGER.info("Fin boucle for");
-
-			
+			//Recherche de l'existence d'un utilisateur ayant l'email et le mot de passe donnés
+			boolean utilisateurTrouve = MaDao.getUserDao().existUser(email, password);
+		
 			// L'utilisateur a été trouvé
 			if(utilisateurTrouve){
-					//On crée un Cookie pour les communications suivantes
-					Cookie cookie = new Cookie("usermail", email);
-					cookie.setVersion(1);
-					cookie.setComment("Authentification OK");
-					cookie.setMaxAge(-1); //Cookie conservé pendant toute la session
-					cookie.setHttpOnly(true);
-					response.addCookie(cookie);
+					int idUserAuthentifie = MaDao.getUserDao().recupererIdUser(email, password);
+					Utilisateur newUser = MaDao.getUserDao().getUserById(idUserAuthentifie);
 					
 		            //On ajoute utilisateurTrouve pour exploitation dans la jsp afin d'afficher le message de bienvenue.
 		            request.setAttribute("findUser", utilisateurTrouve);
 		            // Ajouts des sous-menus
 		            session.setAttribute("utilisateurConnecte", "1");
+		            session.setAttribute("authUser", newUser);
 		            
 					//On renvoie l'utilisateur à l'index avec ajout du message de bienvenue
 					RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  

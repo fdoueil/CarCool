@@ -56,25 +56,9 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCW_E-FQsQOcbgaiNYj7PSZ_JTzICvZQ"
         async defer></script>
         
-
         <script type="text/javascript">
-	
-	    	$(document).ready(function() {
-	    		
-	    		$('#adresse').blur(function() {
-	    			var geocoder = new google.maps.Geocoder();
-	    			var address = $("#adresse").val();
-	    	        geocoder.geocode({'address': address}, function(results, status) {
-	    	        	if (status === 'OK') {
-	    	        		$('#latitude').val(results[0].geometry.location.lat());
-	    	        		$('#longitude').val(results[0].geometry.location.lng());
-	    	        	}
-	    	        });
-	    		});
-	    	});
-    	
+        	<c:import url="/WEB-INF/js/localisation.js"/>
     	</script>
-
 	</body>
 
 </html>
